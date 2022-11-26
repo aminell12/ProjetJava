@@ -1,4 +1,4 @@
-package consoCarbone.paquet;
+package paquet;
 import consoCarbone.*;
 
 

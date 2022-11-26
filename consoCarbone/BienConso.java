@@ -9,7 +9,7 @@ public class BienConso extends ConsoCarbone{
     public BienConso(double montant){ //Constructeur de la classe BienConso
         super();
         this.montant = montant;
-        this.impact = this.montant/1750;
+        impact = this.montant/1750;
     }
 
     //---Getters et Setters---   
@@ -18,13 +18,13 @@ public class BienConso extends ConsoCarbone{
     }
     public void setMontant (double montant){ //Initialise le montant
         this.montant = montant;
-        this.impact = this.montant/1750; // Mise à jour de l'impact lorsque le montant change
+        impact = this.montant/1750; // Mise à jour de l'impact lorsque le montant change
     } 
     //---Fin Getters et Setters---  
 
     @Override
     public String toString(){
-        return "Le montant de la consommation des biens est de : " + this.montant + ". Son impact est de " + this.impact+".";
+        return "Le montant de la consommation des biens est de : " + montant + ". Son impact est de " + impact+".";
     }
     
     public static void français(){//Méthode statique pour les françsais

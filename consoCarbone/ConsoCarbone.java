@@ -1,6 +1,6 @@
 package consoCarbone;
 
-public abstract class ConsoCarbone implements Comparable {   // je déclare la classe Consocarbone en tant que classe abstaite car elle est étendue par plusieurs classes.
+public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {   // je déclare la classe Consocarbone en tant que classe abstaite car elle est étendue par plusieurs classes.
                                         //J'implémente l'interface comparable pour poiuvoir comparé l'impact carbone de deux instances différentes
     private final int ID;
     private static int cptID;
@@ -45,7 +45,11 @@ public abstract class ConsoCarbone implements Comparable {   // je déclare la c
 		return true;
 	}
 
-
+    public int compareTo(ConsoCarbone inst) {
+	   if (impact==inst.impact) return 0;
+	   if (impact<inst.impact) return -1;
+	   return 1;
+    }
     
 
 }

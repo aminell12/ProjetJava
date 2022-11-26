@@ -16,7 +16,7 @@ public enum CE {
         this.alpha = alpha;
     }
     public double getCE(){ //Initialise la classe énergétique
-        return this.alpha;
+        return alpha;
     }
     
 }

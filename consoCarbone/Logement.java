@@ -1,7 +1,7 @@
 package consoCarbone;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Logement extends ConsoCarbone {
     private int superficie;
@@ -13,19 +13,19 @@ public class Logement extends ConsoCarbone {
         super();
         this.superficie = superficie;
         this.classeE = classE;
-        this.impact = this.classeE.getCE() * this.superficie;
+        impact = this.classeE.getCE() * this.superficie;
     }
 
     //---Getters et Setters--- 
     public int getSuperficie(){ //Retourne la sperfécie d'un logement
-        return this.superficie;
+        return superficie;
     }
     public void setSuperficie (int superficie){ // Initialise la superficie d'un logement
         this.superficie = superficie;
     }
 
     public CE getCE(){ // Retourne la classe énergétique d'un logement
-        return this.classeE;
+        return classeE;
     }
     public void setCE (CE classeE){ // Initialise la CE d'un logement
         this.classeE = classeE;
@@ -34,7 +34,7 @@ public class Logement extends ConsoCarbone {
 
     @Override
     public String toString(){
-        return "Le logement a une superficie de : " + this.superficie + " m2, la une classe energétique est de type : " + this.classeE + ". Son impact énergetique est de: " + this.impact + " TCO2eq.";
+        return "Le logement a une superficie de : " + superficie + " m2, la une classe energétique est de type : " + classeE + ". Son impact énergetique est de: " + impact + " TCO2eq.";
     }
     
     public static void français(){ //Méthode statique pour les francais

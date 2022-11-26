@@ -1,5 +1,5 @@
 package consoCarbone;
-import java.util.Scanner;
+//import java.util.Scanner;
 
     public class Alimentation extends ConsoCarbone {
         private double txBoeuf;
@@ -15,12 +15,12 @@ import java.util.Scanner;
             super();
             this.txBoeuf = txBoeuf;
             this.txVege = txVege;
-            this.impact = (c1*this.txBoeuf) + (c2*(1-this.txVege-this.txBoeuf))+c3*this.txVege;
+            impact = (c1*this.txBoeuf) + (c2*(1-this.txVege-this.txBoeuf))+c3*this.txVege;
         }
 
         //---Getters et Setters---    
         public double getTxBoeuf(){ //Retourne le taux Boeuf
-            return this.txBoeuf;
+            return txBoeuf;
         }
         public void setTxboeuf ( double txBoeuf ){  //Initialise le taux d'un repas à base de Boeuf et vérifie la valeur
             if (0<txBoeuf && txBoeuf <1) {
@@ -33,7 +33,7 @@ import java.util.Scanner;
         }
 
         public double getTxVege(){ //Retourne le taux Végétarien
-            return this.txVege;
+            return txVege;
         }
         public void setTxVege (double txVege){ //Initialise le taux d'un repas Végétarien et vérifie la valeur
             if (0<txVege && txVege <1) {
@@ -49,7 +49,7 @@ import java.util.Scanner;
 
         @Override
         public String toString(){
-            return "Le taux de repas est de : " + (this.txBoeuf+this.txVege )+". L'impact énergétique est de : "+ this.impact +" TCO2eq.";
+            return "Le taux de repas est de : " + (this.txBoeuf+this.txVege )+". L'impact énergétique est de : "+ this.impact +" TCO2eq."; //faux affichage revoir cette partie
         }
 
         public static void français(){//Méthode statique pour les francais
