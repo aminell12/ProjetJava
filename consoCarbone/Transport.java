@@ -16,6 +16,7 @@ public class Transport extends ConsoCarbone{
 
     public Transport (Taille taille, int kilomAnnee, int amortissement){ //Constructeut de la classe Transport
         super();
+        possede=true;
         this.taille = taille;
         this.kilomAnnee = kilomAnnee;
         this.amortissement = amortissement;
