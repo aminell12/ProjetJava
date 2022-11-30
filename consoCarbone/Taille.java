@@ -11,7 +11,7 @@ public enum Taille {
     }
     //---Getter---
     public double getEmission(){
-        return this.emission;
+        return emission;
     }
     
 }

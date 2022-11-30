@@ -47,12 +47,12 @@ package consoCarbone;
         //---fin Getters et Setters---  
 
 
-        @Override
+
         public String toString(){
-            return "Le taux de repas est de : " + (this.txBoeuf+this.txVege )+". L'impact énergétique est de : "+ this.impact +" TCO2eq."; //faux affichage revoir cette partie
+            return "Le taux de repas est de : " + (this.txBoeuf+this.txVege )+". L'impact energétique est de : "+ this.impact +" TCO2eq."; //faux affichage revoir cette partie
         }
 
-        public static void français(){//Méthode statique pour les francais
+        public static void francais(){//Méthode statique pour les francais
             System.out.println("Viandes et poisson : 1144 Kg/an. Produits laitiers et oeufs : 408 Kg/an. Autres : 538 Kg/an. Boisson : 263 Kg/an. Total : 2353 Kg/an");
         }   
 

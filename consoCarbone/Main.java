@@ -27,29 +27,29 @@ public class Main {
 
         ConsoCarbone logement= new Logement(140,CE.A);
 		ConsoCarbone alim= new Alimentation(0.2,0.35);
-		ConsoCarbone transport= new Transport(true,Taille.P,15000,5);
+		ConsoCarbone transport= new Transport(Taille.P,15000,5);
 		ConsoCarbone bienconso = new BienConso(2000);
 
         System.out.println("              ----EMPREINTE CARBONE DU LOGEMENT----");
-		Logement.français();
+		Logement.francais();
 		System.out.println();
 		System.out.println(logement.toString());
 		System.out.println("\n\n");
 
         System.out.println("              ----EMPREINTE CARBONE DE L'ALIMENTATION----");
-		Alimentation.français();
+		Alimentation.francais();
 		System.out.println();
 		System.out.println(alim.toString());
 		System.out.println("\n\n");
 		
 		System.out.println("              ----EMPREINTE CARBONE DES TRANSPORTS----");
-		Transport.français();
+		Transport.francais();
 		System.out.println();
 		System.out.println(transport.toString());
 		System.out.println("\n\n");
 		
 		System.out.println("              ----EMPREINTE CARBONE DES BIENS CONSOMÉS----");
-		BienConso.français();
+		BienConso.francais();
 		System.out.println();
 		System.out.println(bienconso.toString());
 

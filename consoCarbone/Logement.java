@@ -32,13 +32,13 @@ public class Logement extends ConsoCarbone {
     }
     //---Fin Getters et Setters---  
 
-    @Override
+
     public String toString(){
-        return "Le logement a une superficie de : " + superficie + " m2, la une classe energétique est de type : " + classeE + ". Son impact énergetique est de: " + impact + " TCO2eq.";
+        return "Le logement a une superficie de : " + superficie + " m2, la une classe energetique est de type : " + classeE + ". Son impact energetique est de: " + impact + " TCO2eq.";
     }
     
-    public static void français(){ //Méthode statique pour les francais
-        System.out.println("Énergie et utilités : 1696 Kg/an. Construction et gros entretien : 675 Kg/an. Équipement des logements : 335 Kg/an. Total : 2706 Kg/an");
+    public static void francais(){ //Méthode statique pour les francais
+        System.out.println("Energie et utilites : 1696 Kg/an. Construction et gros entretien : 675 Kg/an. Equipement des logements : 335 Kg/an. Total : 2706 Kg/an");
     }
 
     //Teste si l'utilisateur entre la bonne empreinte carbone

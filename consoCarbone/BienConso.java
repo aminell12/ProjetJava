@@ -27,7 +27,7 @@ public class BienConso extends ConsoCarbone{
         return "Le montant de la consommation des biens est de : " + montant + ". Son impact est de " + impact+".";
     }
     
-    public static void français(){//Méthode statique pour les françsais
+    public static void francais(){//Méthode statique pour les francsais
         System.out.println("Achat et usages internet et technologies : 1180 Kg/an. Autres biens et services : 682 Kg/an. Habillement : 763 Kg/an. Total : 2625 Kg/an");
     }
 }

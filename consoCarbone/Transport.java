@@ -9,40 +9,26 @@ public class Transport extends ConsoCarbone{
     private int kilomAnnee;
     private int amortissement;
     
-    public Transport(boolean b){}
+    public Transport(boolean possede){
+    	this.possede = possede;
+    	impact = 0;
+    }
 
-    public Transport (boolean possede, Taille taille, int kilomAnnee, int amortissement){ //Constructeut de la classe Transport
+    public Transport (Taille taille, int kilomAnnee, int amortissement){ //Constructeut de la classe Transport
         super();
-        this.possede = possede;
         this.taille = taille;
         this.kilomAnnee = kilomAnnee;
         this.amortissement = amortissement;
-        if (this.possede){
-            impact = kilomAnnee*1.93*0.0001+ (this.taille.getEmission()/amortissement);
-        }
-        else{
-            impact = 0;
-        }   
+        impact = kilomAnnee*1.93*0.0001+ (this.taille.getEmission()/amortissement);
     }
     
-//    public Transport (boolean possede, Taille taille, int kilomAnnee, int amortissement){ //Constructeut de la classe Transport
-//        super();
-//        this.possede = possede; 
-//        if (this.possede) {
-//        	this.taille = taille;
-//        	this.kilomAnnee = kilomAnnee;
-//        	this.amortissement = amortissement;
-//          impact = kilomAnnee*1.93*0.0001+ (this.taille.getEmission()/amortissement);
-//        }
-//    }
-// 											voir cette partie avec le grp psk qst de logique
     
     
     //---Getters et Setters--- 
-    public boolean getPossede(){//Retourne si l'individu possède une voiture ou non
+    public boolean getPossede(){//Retourne si l'individu possede une voiture ou non
         return possede;
     }
-    public void getPossede(boolean possede){ //Initialise le boolean possede
+    public void setPossede(boolean possede){ //Initialise le boolean possede
         if (!(this.possede = possede)) {
         	taille=null;
         	kilomAnnee=0;
@@ -59,18 +45,18 @@ public class Transport extends ConsoCarbone{
         impact = kilomAnnee*1.93*0.0001+ (this.taille.getEmission()/amortissement);
     }
 
-    public int getKilomAnnee(){// Retourne le nombre de kilomètre par année
+    public int getKilomAnnee(){// Retourne le nombre de kilometre par annee
         return this.kilomAnnee;
     }
-    public void setKilomAnnee(int kilomAnnee){//Initialise le nombre de kilomètre parcourrue par année
+    public void setKilomAnnee(int kilomAnnee){//Initialise le nombre de kilometre parcourrue par annee
         this.kilomAnnee = kilomAnnee;
         impact = kilomAnnee*1.93*0.0001+ (this.taille.getEmission()/amortissement);
     }
 
-    public int getAmortissement(){//Retourne la durée de vie d'un véhicule
+    public int getAmortissement(){//Retourne la duree de vie d'un vehicule
         return this.amortissement;
     }
-    public void setAmortissement(int amortissement){//Initialise la durée de vie d'un véhicule
+    public void setAmortissement(int amortissement){//Initialise la duree de vie d'un vehicule
         this.amortissement = amortissement;
         impact = kilomAnnee*1.93*0.0001+ (this.taille.getEmission()/amortissement);
     }
@@ -78,19 +64,19 @@ public class Transport extends ConsoCarbone{
 
     public String toString(){
         if (this.possede){
-            return "L'individu possède une voiture. Sa taille est "+ taille+". Elle a roulé " + kilomAnnee+ " par an. Elle possède un amortissement de " + amortissement+ ". Lors de sa fabrication elle a émis " + taille.getEmission()+". Son impact est de " + impact+"."; 
+            return "L'individu possede une voiture. Sa taille est "+ taille+". Elle a roule " + kilomAnnee+ " par an. Elle possede un amortissement de " + amortissement+ ". Lors de sa fabrication elle a emis " + taille.getEmission()+". Son impact est de " + impact+"."; 
         }
         else {
-            return "L'individu ne possède pas de voiture";
+            return "L'individu ne possede pas de voiture";
         }
     }
 
     
-    public static void français(){//Méthode statique pour les français
+    public static void francais(){//Methode statique pour les francais
         System.out.println("Voiture : 1972 Kg/an. Avion : 480 Kg/an. Fret et messagerie : 383 Kg/an. Train et bus : 85 Kg/an. Total : 2920 Kg/an");
     }
 
-    //Test d'erreur dans le cas où l'utilisateur entre une taille erronée
+    //Test d'erreur dans le cas où l'utilisateur entre une taille erronee
     static public boolean isTaille(String s) {
 		List<String> T=Arrays.asList("P","G");
 		return T.contains(s);
