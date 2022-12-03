@@ -105,9 +105,25 @@ public class Utilisateur {
     	Double max= conso.lastKey();
     	System.out.println("La classe avec l'impact le plus elevé est "+conso.get(max));
         
-        //for (String key : keys) {
-        //	if ((map.get(key) == "transport")&&())
-        //}
+    	Set<Double> keys = conso.keySet();
+        for (Double key : keys) {
+        	System.out.println("\nVotre consommation au poste "+conso.get(key)+" est de "+key+" tCO2eq.");
+        	
+        	if ((conso.get(key) == "transport")&&(key>=1.972)) {
+        		System.out.println("C'est supérieur à la moyenne française.\nPriviligiez l'utilisation de transports en communs ou non polluants (velo,trotinette éléctrique,etc...).");
+        	}
+        	if ((conso.get(key) == "logement")&&(key>=2.706)) {
+        		System.out.println("C'est supérieur à la moyenne française.\nLimitez la consommation d'énergie et prenez soin d'éteindre vos appareils éléctroménagers s'ils ne sont pas utilisés.");
+        	}
+        	if ((conso.get(key) == "bienconso")&&(key>=2.625)) {
+        		System.out.println("C'est supérieur à la moyenne française.\nPriviligiez l'achat de vêtements en seconde main et le reconditionnement des appreils éléctroniques.");
+        	}
+        	if ((conso.get(key) == "alimentation")&&(key>=2.353)) {
+        		System.out.println("C'est supérieur à la moyenne française.\nFavorisez la consommation d'aliments végétariens.");
+        	}
+        	//L'impact des services publics est commun à tous les francais, on ne peut donc pas donner de conseils sur cette classe.
+        	
+        }
     }
     
     
