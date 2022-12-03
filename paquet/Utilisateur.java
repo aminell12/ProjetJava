@@ -1,5 +1,6 @@
 package paquet;
 import java.util.*;
+//import org.javatuples.*;
 
 import consoCarbone.*;
 
@@ -86,6 +87,28 @@ public class Utilisateur {
     	}
 		System.out.println("Alimentation : " + alimentation.getImpact() +"TCO2eq\nBiens consommés : " + bienConso.getImpact()+"TCO2eq\nLogement : " + impactLog + "TCO2eq\nTransport : " + impactTr + "TCO2eq\nServices Publics : " + services.getEmpCarbFR() + "TCO2eq.");
     };
+    
+    public void conseille() {
+    	SortedMap<Double,String> conso= new TreeMap<Double,String>();
+    	conso.put(alimentation.getImpact(),"alimentation");
+    	conso.put(bienConso.getImpact(),"bienconso");
+    	conso.put(services.getEmpCarbFR(),"Service");
+    	double impactLog = 0,impactTr=0;
+    	for (Logement log : logements) {
+    		impactLog+=log.getImpact();
+    	}
+    	for (Transport tr :  transports) {
+    		impactTr+=tr.getImpact();
+    	}
+    	conso.put(impactLog,"logement");
+    	conso.put(impactTr,"transport");
+    	Double max= conso.lastKey();
+    	System.out.println("La classe avec l'impact le plus elevé est "+conso.get(max));
+        
+        //for (String key : keys) {
+        //	if ((map.get(key) == "transport")&&())
+        //}
+    }
     
     
     

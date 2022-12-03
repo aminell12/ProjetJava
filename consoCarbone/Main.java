@@ -1,5 +1,10 @@
 package consoCarbone;
 
+import java.util.*;
+
+import paquet.Utilisateur;
+
+
 public class Main {
 
     public static void main (String [] args){
@@ -29,6 +34,7 @@ public class Main {
 		ConsoCarbone alim= new Alimentation(0.2,0.35);
 		ConsoCarbone transport= new Transport(Taille.P,15000,5);
 		ConsoCarbone bienconso = new BienConso(2000);
+		ConsoCarbone services = new ServicesPublics();
 
         System.out.println("              ----EMPREINTE CARBONE DU LOGEMENT----");
 		Logement.francais();
@@ -52,6 +58,15 @@ public class Main {
 		BienConso.francais();
 		System.out.println();
 		System.out.println(bienconso.toString());
+		
+		Collection<Transport> tr = new ArrayList<Transport> ();
+		tr.add((Transport) transport);
+		Collection<Logement> log = new ArrayList<Logement> ();
+		log.add((Logement) logement);
+		
+		Utilisateur u= new Utilisateur((Alimentation) alim,(BienConso)bienconso,log,tr,(ServicesPublics)services);
+		u.conseille();
+		
 
     }
 }
