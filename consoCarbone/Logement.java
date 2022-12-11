@@ -56,7 +56,7 @@ public class Logement extends ConsoCarbone {
 
     
     //       Méthode main propre à la classe Logement. Elle intéragit avec l'utilsateur pour récupérer ses données.
-    /*
+    
 	public static void main(String[] args){
 		Scanner scanner = new Scanner(System.in);
         int superficie;
@@ -88,18 +88,21 @@ public class Logement extends ConsoCarbone {
         		succes=true;
         	}
         	catch (InvalidCEException e) {
-        		System.out.println("\nLa valeur entrée n'est pas une classe energetique valide. Veuillez entrer la classe energetique de votre logement. (choix : A,B,C,D,E,F,G)");
-        	} 
+        		System.out.println(e.getMessage());
+;        	} 
         }
         Logement logement = new Logement(superficie, CE.valueOf(s));
     	System.out.print("\n L'impact de votre logement de "+logement.superficie+" m2 et de classe energetique "+logement.classeE+" est de "+ logement.impact+" TCO2eq.");
         scanner.close();
-    }*/
+    
+	}
 }
 
 
 
 /*
+
+//pour test tous les nombres entiers
 succes=false; //si la varibale a été utilisée auparavant et est true
 while (!succes) {
 try {
@@ -112,15 +115,57 @@ catch (NumberFormatException e) {
 }
 }
 
+
+
+//pour les taux de vege/viandes etc
 succes=false; //si la varibale a été utilisée auparavant et est true
 while (!succes) {
         	try {
         		s = scanner.next();
-        		superficie=Double.parseDouble(s); //parametre a changer en fonction du cas 
+        		taux=Double.parseDouble(s); //parametre a changer en fonction du cas 
+        		if(taux>1 || taux<0) throw new InvalidRateException();
         		succes=true;
         	}
         	catch (NumberFormatException e) {
         		System.out.println("\nLa valeur entrée n'est pas un nombre. Veuillez entrer ....");
         	}
+        	
         }
-*/
+ 
+ 
+ 
+ //pour la taille des voitures 
+     succes=false; //si la varibale a été utilisée auparavant et est true
+     while (!succes) {
+        	try {
+        		s = scanner.next();
+        		if (!Arrays.asList("G","P").contains(s)) {
+        			throw new InvalidSizeException();
+        		}
+        		succes=true;
+        	}
+        	catch (InvalidSizeException e) {
+        		System.out.println(e.getMessage());
+        	} 
+        }
+ 
+
+//pour la propriété d'une voiture
+ 
+     succes=false; //si la varibale a été utilisée auparavant et est true
+     while (!succes) {
+        	try {
+        		s = scanner.next();
+        		if (!Arrays.asList("T","F").contains(s)) {
+        			throw new InvalidBooleanException();
+        		}
+        		succes=true;
+        	}
+        	catch (InvalidSizeException e) {
+        		System.out.println(e.getMessage());
+        	} 
+     }
+     if (s=="T") possede=true;
+     else possede=false;
+        
+  */
