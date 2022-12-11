@@ -1,7 +1,7 @@
 package consoCarbone;
 import java.util.Arrays;
 import java.util.List;
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class Logement extends ConsoCarbone {
     private int superficie;
@@ -46,33 +46,81 @@ public class Logement extends ConsoCarbone {
 		List<String> ce=Arrays.asList("A","B","C","D","E","F","G");
 		return ce.contains(s);
 	}
+    
+  /*  public int compareTo(ConsoCarbone inst) {
+ 	   if (impact==inst.impact) return 0;
+ 	   if (impact<inst.impact) return -1;
+ 	   return 1;
+     }*/
 
 
+    
+    //       Méthode main propre à la classe Logement. Elle intéragit avec l'utilsateur pour récupérer ses données.
     /*
-    *       Méthode main propre à la classe Logement. Elle intéragit avec l'utilsateur pour récupérer ses données.
-    * 
 	public static void main(String[] args){
 		Scanner scanner = new Scanner(System.in);
         int superficie;
-        String s; 
-        empcarbone();
+        String s=""; 
+        boolean succes=false;
+        francais();
         System.out.print("\n Vous êtes sur le calculateur d'empreinte carbone \n"); 
         System.out.print("\n Nous allons calculer l'impact carbone de votre logement. Pour cela nous avons besoin de certaines informations sur votre domicile \n");
         System.out.print("\n Q1 Quelle est la superficie de votre logement ? (en m2) \n");
-        s = scanner.next();
-        while (!isNumEnt(s)) { 
-        	System.out.println("La superficie entrée n'est pas un nombre entier. \n\nVeuillez entrer la superficie de votre logement (en m2).");
-        	s=scanner.next();
+        while (!succes) {
+        	try {
+        		s = scanner.next();
+        		superficie=Integer.parseInt(s);
+        		succes=true;
+        	}
+        	catch (NumberFormatException e) {
+        		System.out.println("\nLa valeur entrée n'est pas un nombre entier. Veuillez entrer la superficie de votre logement.");
+        	}
         }
-        superficie=Integer.valueOf(s);
+        superficie=Integer.parseInt(s);
         System.out.print("\n Q2 Quelle est la classe energetique de votre logement ? (choix : A,B,C,D,E,F,G) \n");
-        s = scanner.next();
-        while (!isCE(s)) {
-        	System.out.print("Cette classe energetique n'existe pas.\n\n Veuillez entrer la classe energetique de votre logement (A,B,C,D,E,F,G).");
-        	s=scanner.next();
+        succes=false;
+        while (!succes) {
+        	try {
+        		s = scanner.next();
+        		if (!Arrays.asList("A","B","C","D","E","F","G").contains(s)) {
+        			throw new InvalidCEException();
+        		}
+        		succes=true;
+        	}
+        	catch (InvalidCEException e) {
+        		System.out.println("\nLa valeur entrée n'est pas une classe energetique valide. Veuillez entrer la classe energetique de votre logement. (choix : A,B,C,D,E,F,G)");
+        	} 
         }
         Logement logement = new Logement(superficie, CE.valueOf(s));
-    	System.out.print("\n L'impact de votre logement de "+logement.superficie+" m2 et de classe energetique "+logement.ce+" est de "+ logement.impact+" TCO2eq.");
+    	System.out.print("\n L'impact de votre logement de "+logement.superficie+" m2 et de classe energetique "+logement.classeE+" est de "+ logement.impact+" TCO2eq.");
         scanner.close();
     }*/
 }
+
+
+
+/*
+succes=false; //si la varibale a été utilisée auparavant et est true
+while (!succes) {
+try {
+	s = scanner.next();
+	superficie=Integer.parseInt(s);
+	succes=true;
+}
+catch (NumberFormatException e) {
+	System.out.println("\nLa valeur entrée n'est pas un nombre entier. Veuillez entrer la superficie de votre logement.");
+}
+}
+
+succes=false; //si la varibale a été utilisée auparavant et est true
+while (!succes) {
+        	try {
+        		s = scanner.next();
+        		superficie=Double.parseDouble(s); //parametre a changer en fonction du cas 
+        		succes=true;
+        	}
+        	catch (NumberFormatException e) {
+        		System.out.println("\nLa valeur entrée n'est pas un nombre. Veuillez entrer ....");
+        	}
+        }
+*/

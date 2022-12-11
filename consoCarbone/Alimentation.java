@@ -54,7 +54,13 @@ package consoCarbone;
 
         public static void francais(){//Méthode statique pour les francais
             System.out.println("Viandes et poisson : 1144 Kg/an. Produits laitiers et oeufs : 408 Kg/an. Autres : 538 Kg/an. Boisson : 263 Kg/an. Total : 2353 Kg/an");
-        }   
+        }
+        
+        public int compareTo(ConsoCarbone inst) {
+     	   if (impact==inst.impact) return 0;
+     	   if (impact<inst.impact) return -1;
+     	   return 1;
+         }
 
 
 

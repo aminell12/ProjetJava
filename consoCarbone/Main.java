@@ -66,7 +66,6 @@ public class Main {
 		
 		Utilisateur u= new Utilisateur((Alimentation) alim,(BienConso)bienconso,log,tr,(ServicesPublics)services);
 		u.conseille();
-		
 
     }
 }

@@ -82,5 +82,11 @@ public class Transport extends ConsoCarbone{
 		List<String> T=Arrays.asList("P","G");
 		return T.contains(s);
 	}
+    
+    public int compareTo(ConsoCarbone inst) {
+ 	   if (impact==inst.impact) return 0;
+ 	   if (impact<inst.impact) return -1;
+ 	   return 1;
+     }
 
 }

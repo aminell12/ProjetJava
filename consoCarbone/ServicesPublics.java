@@ -23,5 +23,11 @@ public class ServicesPublics extends ConsoCarbone{  // Je déclare cette classe 
         return this.EmpCarbFR;
     }
     
+    public int compareTo(ConsoCarbone inst) {
+ 	   if (impact==inst.impact) return 0;
+ 	   if (impact<inst.impact) return -1;
+ 	   return 1;
+     }
+    
 }
 
