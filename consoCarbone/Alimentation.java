@@ -18,7 +18,7 @@ package consoCarbone;
             impact = (c1*this.txBoeuf) + (c2*(1-this.txVege-this.txBoeuf))+c3*this.txVege;
         }
 
-        //---Getters et Setters---    
+        //---Getters et Setters---
         public double getTxBoeuf(){ //Retourne le taux Boeuf
             return txBoeuf;
         }
@@ -47,7 +47,7 @@ package consoCarbone;
         //---fin Getters et Setters---  
 
 
-
+        @Override
         public String toString(){
             return "Le taux de repas est de : " + (this.txBoeuf+this.txVege )+". L'impact energétique est de : "+ this.impact +" TCO2eq."; //faux affichage revoir cette partie
         }

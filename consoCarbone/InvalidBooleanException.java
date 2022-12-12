@@ -1,4 +1,4 @@
-package paquet;
+package consoCarbone;
 
 public class InvalidBooleanException extends Exception{
 

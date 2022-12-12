@@ -33,6 +33,7 @@ public class Logement extends ConsoCarbone {
     //---Fin Getters et Setters---  
 
 
+    @Override
     public String toString(){
         return "Le logement a une superficie de : " + superficie + " m2, la une classe energetique est de type : " + classeE + ". Son impact energetique est de: " + impact + " TCO2eq.";
     }

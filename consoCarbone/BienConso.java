@@ -31,7 +31,7 @@ public class BienConso extends ConsoCarbone{
         System.out.println("Achat et usages internet et technologies : 1180 Kg/an. Autres biens et services : 682 Kg/an. Habillement : 763 Kg/an. Total : 2625 Kg/an");
     }
     
-    @Override
+
 	public int compareTo(ConsoCarbone inst) {
  	   if (impact==inst.impact) return 0;
  	   if (impact<inst.impact) return -1;
