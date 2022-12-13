@@ -12,7 +12,7 @@ public class Utilisateur {
     private Collection<Transport> transports;
     private ServicesPublics services;
 
-    public Utilisateur (Alimentation alimentation,BienConso bienConso, Collection<Logement> logements , Collection <Transport> transports, ServicesPublics services){
+    public Utilisateur (Alimentation alimentation,BienConso bienConso, Collection<Logement> logements , Collection <Transport> transports, ServicesPublics services){//Constructeur de la classe Utilisateur
         this.alimentation = alimentation;
         this.bienConso = bienConso;
         this.logements = logements;
@@ -20,9 +20,9 @@ public class Utilisateur {
         this.services = services;
     }
 
-    //FAIRE GETTER ET SETTER DES ATTRIBUTS DE LA CLASSE
-    //faire setter avec les attributs de chaque chaque classes? 
-   
+    
+
+   //---Getters et Setters--- 
 
     public Alimentation getAlimentation() {
 		return alimentation;
@@ -63,6 +63,8 @@ public class Utilisateur {
 	public void setServices(ServicesPublics services) {
 		this.services = services;
 	}
+
+	//---Fin Getters et Setters---
 
 	
     public double calculerEmpreinte(){ // Calucle l'empreinte carbone totale d'un indiviu 
