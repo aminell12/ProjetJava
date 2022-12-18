@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Logement extends ConsoCarbone {
+public final class Logement extends ConsoCarbone {
     private int superficie;
     private CE classeE;
 

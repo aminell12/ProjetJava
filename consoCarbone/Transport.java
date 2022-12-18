@@ -3,7 +3,7 @@ package consoCarbone;
 import java.util.Arrays;
 import java.util.List;
 
-public class Transport extends ConsoCarbone{
+public final class Transport extends ConsoCarbone{
     private boolean possede;
     private Taille taille;
     private int kilomAnnee;

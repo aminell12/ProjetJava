@@ -1,6 +1,6 @@
 package consoCarbone;
 
-public class InvalidCEException extends Exception{
+public final class InvalidCEException extends Exception{
 
 	
 	public InvalidCEException() {

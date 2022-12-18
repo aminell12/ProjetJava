@@ -1,7 +1,7 @@
 package consoCarbone;
 //import java.util.Scanner;
 
-    public class Alimentation extends ConsoCarbone {
+    public final class Alimentation extends ConsoCarbone {
         private double txBoeuf;
         private double txVege;
 

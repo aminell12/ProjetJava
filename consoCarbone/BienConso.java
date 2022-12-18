@@ -1,6 +1,6 @@
 package consoCarbone;
 
-public class BienConso extends ConsoCarbone{
+public final class BienConso extends ConsoCarbone{
     private double montant;
 
 

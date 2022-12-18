@@ -1,6 +1,6 @@
 package consoCarbone;
 
-public class ServicesPublics extends ConsoCarbone{  // Je déclare cette classe comme étant un singleton car on a besoin que d'un élément dans cette classe,
+public final class ServicesPublics extends ConsoCarbone{  // Je déclare cette classe comme étant un singleton car on a besoin que d'un élément dans cette classe,
                                 // l'empreinre carbone des français
                                 //REVOIR CETTE CLASSE PARCE QUE TRES FLOU CE QUE J'AI FAIT
                                 // FAUT-IL CREER PLUSIEURS INSTANCES POUR CHAQUE SERVICE PUBLIC (Justice, police,éducation) et chaque poste c'est 1,5?? => du coup changer le design pattern parce plus singleton
