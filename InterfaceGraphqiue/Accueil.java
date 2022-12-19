@@ -1,10 +1,10 @@
 package InterfaceGraphqiue;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-import java.awt.image.BufferedImage;
-import java.io.*;
+//import java.awt.image.BufferedImage;
+//import java.io.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -65,10 +65,10 @@ public class Accueil extends JFrame{
     }
 
     //Action pour le Bouton suivant 
-    private void BTnextListener(ActionEvent event){
+    //private void BTnextListener(ActionEvent event){
         
 
-    }
+    //}
 
     /* Méthode de construction du bouton Suivant*/
     private JPanel creeBouton_suivant(){

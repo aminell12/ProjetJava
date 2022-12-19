@@ -3,7 +3,7 @@ package consoCarbone;
 
 //j'ai enlevé l'abstraction psk j'en avais besoin pour la gestion d'erreur mais je trouverai quoi faire pour ne plus avoir d'erreurs (psk c'est vraiment le bordel quand c'est abstratit y 62 warnings ou erreurs)
 public class ConsoCarbone implements Comparable<ConsoCarbone> {   // je déclare la classe Consocarbone en tant que classe abstaite car elle est étendue par plusieurs classes.
-                                        //J'implémente l'interface comparable pour poiuvoir comparé l'impact carbone de deux instances différentes
+                                        //J'implémente l'interface comparable pour pouvoir comparé l'impact carbone de deux instances différentes
     private final int ID;
     private static int cptID;
     protected double impact; //Attribut Impact commun à toutes les classes filles, il est donc placé dans la classe mère
