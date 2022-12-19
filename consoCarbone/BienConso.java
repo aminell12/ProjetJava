@@ -24,7 +24,7 @@ public final class BienConso extends ConsoCarbone{
 
     @Override
     public String toString(){
-        return "Le montant de la consommation des biens est de : " + montant + ". Son impact est de " + impact+".";
+        return "Le montant de la consommation des biens est de : " + montant + ". Son impact est de " + impact+"TCO2eq.";
     }
     
     public static void francais(){//Méthode statique pour les francsais
