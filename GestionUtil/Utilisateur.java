@@ -140,7 +140,7 @@ public class Utilisateur {
         
     	Set<Double> keys = conso.keySet();
         for (Double key : keys) {
-        	System.out.println("\n\nVotre consommation au poste "+conso.get(key)+" est de "+key+" TCO2eq.");
+        	System.out.println("\n\nVotre consommation au poste "+ conso.get(key) +" est de "+ key +" TCO2eq.");
         	
         	if ((conso.get(key) == "transport")&&(key>ITransport)) {
         		System.out.println("C'est supérieur à la moyenne française. Priviligiez l'utilisation de transports en communs ou non polluants (velo,trotinette éléctrique,etc...).");
