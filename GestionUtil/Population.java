@@ -36,7 +36,6 @@ public class Population extends Utilisateur {
             for (Transport tr : Utilisateur.transports){
                 impactLogementPop += tr.getImpact();
             }
-
         }
         impactMoyPop = impactPop/utilisateurs.size();
 
