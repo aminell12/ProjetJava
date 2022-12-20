@@ -2,7 +2,7 @@ package GestionUtil;
 import java.util.*;
 import consoCarbone.*;
 
-public class Population extends Utilisateur {
+public final class Population extends Utilisateur {
 
     private Collection <Utilisateur> utilisateurs;
 
@@ -97,7 +97,7 @@ public class Population extends Utilisateur {
     //Methode qui va permettre de detailler, calucler et conseiller sur l'empreinte carbone de chaque individu de la poupulation
     public void DetaillePopulation(){
         for (Utilisateur ut : utilisateurs){
-            System.out.println("Fiche récapitulative de " + ut.getNom() +" "+ ut.getPrenom() + ":\n" );
+            System.out.println("\n\n----------------Fiche récapitulative de " + ut.getNom() +" "+ ut.getPrenom() + ":----------------\n" );
             ut.detaillerEmpreinte();
             System.out.println("\n\n");
             ut.conseille();
@@ -107,6 +107,7 @@ public class Population extends Utilisateur {
 
 
     public void DecisionMairie(){
+        System.out.println("\n\n----------------Rapport du Maire:----------------\n" );
         if ((impactTransportMoy>ITransport)) {
             System.out.println("Au vu des derniers relevés sur l'Empreinte Carbone de la population, une nouvelle taxe concernant les propriétaires de voiture sera mise en place afin de compenser l'augmentation de l'EC.\n L'utilsation des transports est fortement recommendée, nous mettrons en place de nouveaux projets afin de palier cette augmentation.");
         }
