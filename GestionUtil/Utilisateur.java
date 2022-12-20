@@ -82,9 +82,6 @@ public class Utilisateur {
 
 	//On suppose qu'on ne peut pas changer le nom et prenom d'un individu donc pas besoin de setter pour leurs attributs
 
-	public void setImpactUt(double impact){
-		impactUt = impact;
-	}
 
 	public void setAlimentation(Alimentation alimentation) {
 		Utilisateur.alimentation = alimentation;

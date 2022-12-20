@@ -7,16 +7,13 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import GestionUtil.*;
 import consoCarbone.*;
-<<<<<<< HEAD
-import GestionUtil.*;
-=======
-import InterfaceGraphqiue.*;
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Accueil extends JFrame{
     /**
@@ -25,10 +22,13 @@ public class Accueil extends JFrame{
 	private static final long serialVersionUID = 1L;
 	Utilisateur util;
 	Alimentation alim;
-	Logement log;
+	Collection <Logement> log=new ArrayList <Logement>();
 	BienConso bc;
-	Transport tr;
+	Collection <Transport> tr=new ArrayList <Transport>();
 	ServicesPublics sp; 
+	JTextField nom,prenom;
+	
+	JDialog Id=new JDialog((JFrame)null,"Identité",true);
 	
 	
 	
@@ -40,8 +40,56 @@ public class Accueil extends JFrame{
         this.setLocationRelativeTo(null); //Centre la fenêtre à partir de l'écran de l'utilisateur
         //setResizable(false); //On interdit la redimensionnement de la fenêtre
 
+        
+      //Récupération de l'identité de l'utilisateur
+        JOptionPane.showMessageDialog(null, "Avant de commencer, veuillez entrer votre nom et votre prénom" , "Identité", JOptionPane.INFORMATION_MESSAGE);
+        
+        
+        Id.setSize(300, 200);
+	    Id.setLocationRelativeTo(null);
+	    Id.setResizable(false);
+	    Id.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        
+        
+        JPanel panNom=new JPanel();
+		nom=new JTextField();
+		nom.setPreferredSize(new Dimension(90, 25));
+		panNom.setBorder(BorderFactory.createTitledBorder(""));
+		JLabel nomLab=new JLabel("Nom: ");
+		panNom.add(nomLab);
+		panNom.add(nom);
+        
+		JPanel panPrenom=new JPanel();
+		prenom=new JTextField();
+		prenom.setPreferredSize(new Dimension(90, 25));
+		panPrenom.setBorder(BorderFactory.createTitledBorder(""));
+		JLabel prenomLab=new JLabel("Prenom: ");
+		panPrenom.add(prenomLab);
+		panPrenom.add(prenom);
+		
+	
+        
+        JPanel ide = new JPanel();
+        JPanel boutons=new JPanel();
+
+        ide.add(panNom);
+		ide.add(panPrenom);
+		
+		JButton val = new JButton("Validate");
+		val.addActionListener( e -> {
+			Id.dispose();
+		});
+		boutons.add(val);
+		
+		Id.getContentPane().add(ide, BorderLayout.CENTER);
+		Id.getContentPane().add(boutons,BorderLayout.SOUTH);
+		
+		
+		Id.setVisible(true);
+        
+        
         /*Construction de la barre de menu */
-        this.setJMenuBar(creetMenuBar());
+        this.setJMenuBar(creetMenuBar(this));
 
 
         /*Construction de la fenêtre*/
@@ -50,33 +98,33 @@ public class Accueil extends JFrame{
         
 
         //Titre de ma fenêtre
-        JLabel Titre = new JLabel("Bienvenue dans notre Projet Empreinte Carbonne", SwingConstants.CENTER);
-        //Titre.setVerticalAlignment(JLabel.TOP);
-        //Titre.setBounds(50, 20, 1000, 100);
+        JLabel Titre = new JLabel("Bienvenue "+prenom.getText()+" "+nom.getText()+" dans notre Projet Empreinte Carbonne!", SwingConstants.CENTER);
         Titre.setFont(new Font("Serif", Font.BOLD,20));
         contentFen.add(Titre);
-
+        //contentFen.add(new JLabel("Pour commencer, veuillez entrer votre nom et votre prénom."));
+        
+        
+		
 
         //Ajouter Logo REVOIR !!!!!!!!!!!!!!!!!!!!!!!!!!
-<<<<<<< HEAD
-        contentFen.add(creeLogo(),BorderLayout.CENTER);
-    
-=======
         //contentFen.add(creeLogo(),BorderLayout.CENTER);
 
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
-        //Bouton Suivant
+        //Panel du bouton Suivant
         JPanel next = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        
         //Bouton Suivant 
         JButton BTnext = new JButton("Suivant");
         next.add(BTnext, BorderLayout.SOUTH);
         BTnext.addActionListener(new Fenetre2());
         this.add(next,BorderLayout.SOUTH);
-        this.setVisible(true);
+        
+        
+        
     }
+	
 
     /*Méthode de constrcution de la barre de menu */
-    private JMenuBar creetMenuBar() {
+    private JMenuBar creetMenuBar(JFrame page) {
         //Barre de menu
         JMenuBar menubar = new JMenuBar();
         //Menu déroulant
@@ -84,30 +132,22 @@ public class Accueil extends JFrame{
         menubar.add (mnufile);
         
         mnufile.setFont(new Font (null, Font.BOLD, 12));
-<<<<<<< HEAD
-        
-        
-=======
 
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
+        
         //Élement qu'on ajoute au menu déroulant
         JMenuItem BTquitter = new JMenuItem("Quitter le Projet Empreinte Carbone");
         mnufile.add(BTquitter);
+        
         //Raccourci
         BTquitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK));
 
         //Listener BTquitter 
         BTquitter.addActionListener( e -> {
-            this.dispose();
+            page.dispose();
         });
         return menubar;
     }
 
-    //Action pour le Bouton suivant 
-   /* private void BTnextListener(ActionEvent event){
-        
-
-    }*/
 
 
 
@@ -130,20 +170,6 @@ public class Accueil extends JFrame{
     
 
     class Fenetre2 extends JFrame implements ActionListener{
-<<<<<<< HEAD
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		JPanel boutons;
-		JButton BTal=new JButton ("Alimentation");
-		JButton BTbc=new JButton ("Biens consommations");
-		JButton BTtrans=new JButton ("Transports");
-		JButton BTlog=new JButton ("Logements");
-		JButton BTbs=new JButton ("Biens et Services");
-		
-=======
 		//Nouvelle fenêtre créee en cliquant sur le bouton suivant
 		private static final long serialVersionUID = 1L;
 		JPanel boutons;
@@ -153,7 +179,6 @@ public class Accueil extends JFrame{
 		JButton BTlog = new JButton ("Logements");
 		JButton BTbs = new JButton ("Biens et Services");
 
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 		public Fenetre2() {
 			super ("Présentation");
 		}
@@ -165,32 +190,14 @@ public class Accueil extends JFrame{
 	        this.setSize(800,600);
 	        this.setLayout(null);
 	        this.setLocationRelativeTo(null);
-	        this.setJMenuBar(creetMenuBar());
+	        this.setJMenuBar(creetMenuBar(this));
 
 	        JPanel contentFen = (JPanel) this.getContentPane();
 	        contentFen.setLayout(new BorderLayout());
-<<<<<<< HEAD
-	        
-=======
 			//Titre de la page
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
+	        
 	        JLabel Titre = new JLabel("Quelle poste de consommation voulez vous analyser?", SwingConstants.CENTER);
 	        Titre.setFont(new Font("Serif", Font.BOLD,20));
-<<<<<<< HEAD
-	        contentFen.add(Titre,BorderLayout.PAGE_START);
-	        
-	        
-	        boutons = new JPanel();
-	        
-	       	boutons.add(BTal);
-	       	BTal.addActionListener(new PageAlim());
-
-	        
-	       	boutons.add(BTbc);
-	       	BTbc.addActionListener(new PageBC());
-
-	        
-=======
 	        contentFen.add(Titre);
 
 	        boutons = new JPanel();
@@ -200,47 +207,32 @@ public class Accueil extends JFrame{
 	       	boutons.add(BTbc);
 	       	BTbc.addActionListener(new PageBC());
 
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 	       	boutons.add(BTtrans);
 	       	BTtrans.addActionListener(new PageTrans());
 
 	        
 	       	boutons.add(BTlog);
-<<<<<<< HEAD
-	       	//BTlog.addActionListener(new PageLog(boutons));
+	       	BTlog.addActionListener(new PageLog());
 
-	        
-=======
-	       	//BTlog.addActionListener(new PageLog());
-
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 	       	boutons.add(BTbs);
-	       	//BTbs.addActionListener(new Pagebs());
+	       	BTbs.addActionListener(new PageBS());
 
 	        this.add(boutons,BorderLayout.SOUTH);
 	        this.setVisible(true);
 			
 		}
 		
-		public class PageAlim extends JFrame implements ActionListener {
+		
+		
+		
+		class PageAlim extends JFrame implements ActionListener {
 
-<<<<<<< HEAD
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			String s;
-			double tauxb,tauxv;
-			boolean succes=false;
-			
-=======
 			
 			private static final long serialVersionUID = 1L;
 			String s;
 			double tauxb,tauxv;
 			boolean succes = false;
 
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 			public PageAlim() {
 				super("Alimentation");
 			}
@@ -249,11 +241,7 @@ public class Accueil extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Fenetre2.this.setVisible(false);
 				boutons.remove(BTal);
-<<<<<<< HEAD
-
 				
-=======
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 				while (!succes) {
 					try {
 						
@@ -272,15 +260,9 @@ public class Accueil extends JFrame{
 				succes=false;
 				while (!succes) {
 					try {
-<<<<<<< HEAD
-						//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-						s= JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de végétarien annuel (entre 0 et 1)", "Taux de vegetarien", JOptionPane.QUESTION_MESSAGE);
-						tauxv=Double.parseDouble(s); 
-=======
 						
 						s = JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de végétarien annuel (entre 0 et 1)", "Taux de vegetarien", JOptionPane.QUESTION_MESSAGE);
 						tauxv=Double.parseDouble(s);
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 						if(tauxv>1 || tauxv<0) throw new InvalidRateException();
 						succes=true;
 					}
@@ -293,33 +275,26 @@ public class Accueil extends JFrame{
 				}
 				alim = new Alimentation(tauxb,tauxv);
 				JOptionPane.showMessageDialog(null, alim.toString(), "Consommation du poste alimentation", JOptionPane.INFORMATION_MESSAGE);
-				Fenetre2.this.setVisible(true);
+				if (boutons.getComponentCount()!=0) Fenetre2.this.setVisible(true);
+				else {
+					Fenetre2.this.dispose();
+					new Final();
+				}
+				
 			}
-<<<<<<< HEAD
-			
-=======
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 		}
 		
 		
-		public class PageBC extends JFrame implements ActionListener {
-<<<<<<< HEAD
+		
+		
+		
+		class PageBC extends JFrame implements ActionListener {
 
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			String s;
-			double montant;
-			boolean succes=false;
-			
-=======
 			private static final long serialVersionUID = 1L;
 			String s;
 			double montant;
 			boolean succes = false;
 
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 			public PageBC() {
 				super("Bien Consommation");
 			}
@@ -331,47 +306,37 @@ public class Accueil extends JFrame{
 
 				
 				while (!succes) {
-					try {
-<<<<<<< HEAD
-						//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-						s= JOptionPane.showInputDialog(null, "Veuillez entrer le montant de la consommation des biens", "Montant biens conso", JOptionPane.QUESTION_MESSAGE);
-						montant=Double.parseDouble(s); 
-						succes=true;
-=======
-						
+					try {						
 						s = JOptionPane.showInputDialog(null, "Veuillez entrer le montant de la consommation des biens", "Montant biens conso", JOptionPane.QUESTION_MESSAGE);
 						montant = Double.parseDouble(s);
 						succes = true;
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 					}
 					catch (NumberFormatException e1) {
 						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un nombre à décimal !", "Attention!", JOptionPane.WARNING_MESSAGE);
 		        	}
-<<<<<<< HEAD
-					
-				}
-				
-				bc=new BienConso(montant);
-=======
 				}
 				bc = new BienConso(montant);
->>>>>>> fbb6764cfa36e6c50ad2c8b702d86a84bc936cdc
 				JOptionPane.showMessageDialog(null, bc.toString(), "Consommation du poste bien conso", JOptionPane.INFORMATION_MESSAGE);
-				Fenetre2.this.setVisible(true);
+				if (boutons.getComponentCount()!=0) Fenetre2.this.setVisible(true);
+				else {
+					Fenetre2.this.dispose();
+					new Final();
+				}
 			}
 			
 		}
 
-		public class PageTrans extends JFrame implements ActionListener {
+		
+		
+		
+		class PageTrans extends JFrame implements ActionListener {
+			
 			private static final long serialVersionUID = 1L;
-
-			boolean possede;
-    		Taille taille;
-    		int kilomAnnee;
-   			int amortissement;
 
 			String s;
 			boolean succes = false;
+			
+			int nbvoiture;
 
 			public PageTrans(){
 				super("Transport");
@@ -381,38 +346,337 @@ public class Accueil extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Fenetre2.this.setVisible(false);
 				boutons.remove(BTtrans);
-
-
+				
 				while (!succes) {
 					try {
-						//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-						s = JOptionPane.showInputDialog(null, "Veuillez entrer le montant de la consommation des biens", "Montant biens conso", JOptionPane.QUESTION_MESSAGE);
-						possede = s;
+						s = JOptionPane.showInputDialog(null, "Combien de voitures possédez vous? ", "Nombre de voitures", JOptionPane.QUESTION_MESSAGE);
+						nbvoiture=Integer.parseInt(s);
+						if (nbvoiture <0) throw new NumberFormatException();
 						succes = true;
 					}
-					catch (InvalidBooleanException e2) {
-						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas une reponse adéquate !", "Attention!", JOptionPane.WARNING_MESSAGE);
+					catch (NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un un nombre entier positif !", "Attention!", JOptionPane.WARNING_MESSAGE);
 		        	}
 				}
-
-				while (!succes) {
-					try {
-						//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-						s = JOptionPane.showInputDialog(null, "Veuillez entrer le montant de la consommation des biens", "Montant biens conso", JOptionPane.QUESTION_MESSAGE);
-						taille = s;
-						succes = true;
-					}
-					catch (InvalidSizeException e1) {
-						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas une Taille !", "Attention!", JOptionPane.WARNING_MESSAGE);
-					}
+				JOptionPane.showMessageDialog(null, "Le formulaire suivant va s'afficher "+nbvoiture+" fois.\nVeuillez entrer les informations de chacun de vos véhicules", "Information", JOptionPane.INFORMATION_MESSAGE);
+				for (int i =1;i<=nbvoiture;i++) {
+					new FormTr(null, "Véhicule "+i,true);
+					JOptionPane.showMessageDialog(null, ((ArrayList<Transport>) tr).get(i-1).toString(), "Consommation des transports", JOptionPane.INFORMATION_MESSAGE);
 				}
 				
+				if (boutons.getComponentCount()!=0) Fenetre2.this.setVisible(true);
+				else {
+					Fenetre2.this.dispose();
+					new Final();
+				}
+			}
+			
+			class FormTr extends JDialog{
 
-				bc = new Transport();
-				JOptionPane.showMessageDialog(null, bc.toString(), "Consommation du poste bien conso", JOptionPane.INFORMATION_MESSAGE);
-				Fenetre2.this.setVisible(true);
+				private static final long serialVersionUID = 1L;
+				
+				private JComboBox<String> size;
+				private Taille taille;
+				private int kilomAnnee,amortisseur;
+				private JTextField kilomA,amort;
+				private JLabel sizeLab,kilomLab,amortLab;
+				
+				public FormTr(JFrame parent,String title,boolean modal) {
+					super(parent, title, modal);
+					this.setSize(550, 270);
+				    this.setLocationRelativeTo(null);
+				    this.setResizable(false);
+				    this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+				    this.initComponent();
+				    
+				    this.setVisible(true);
+				}
+				
+				public void initComponent() {
+					
+					//Taille
+					JPanel panTaille=new JPanel ();
+					panTaille.setBorder(BorderFactory.createTitledBorder("Taille du véhicule"));
+					size=new JComboBox<String>();
+					size.addItem("Petite");
+					size.addItem("Grande");
+					sizeLab=new JLabel ("Taille :");
+					panTaille.add(sizeLab);
+					panTaille.add(size);
+					
+					
+					//Killometres par an
+					JPanel panKilom=new JPanel();
+					kilomA=new JTextField();
+					kilomA.setPreferredSize(new Dimension(90, 25));
+					panKilom.setBorder(BorderFactory.createTitledBorder("Kilomètres par an"));
+					kilomLab=new JLabel("Nombre de kilomètres par an :");
+					panKilom.add(kilomLab);
+					panKilom.add(kilomA);
+					panKilom.add(new JLabel("km."));
+					
+					
+					//Amortissement
+					JPanel panAmort= new JPanel();
+					amort=new JTextField();
+					amort.setPreferredSize(new Dimension(90, 25));
+					panAmort.setBorder(BorderFactory.createTitledBorder("Amortissement"));
+					amortLab=new JLabel("Amortissement :");
+					panAmort.add(amortLab);
+					panAmort.add(amort);
+					
+					
+					JPanel content =new JPanel();
+					content.add(panTaille);
+					content.add(panKilom);
+					content.add(panAmort);
+					
+					JPanel boutons = new JPanel();
+					JButton next= new JButton("Suivant");
+					next.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent a) {
+							setVisible(false);
+							succes=false;
+							while (!succes) {
+								try {
+									s=kilomA.getText();
+									kilomAnnee=Integer.parseInt(s);
+									if (kilomAnnee <0) throw new NumberFormatException();
+									succes = true;
+								}
+								catch (NumberFormatException e1) {
+									JOptionPane.showMessageDialog(null, "L'élément kilometre par an que vous avez entré au clavier n'est pas un un nombre entier positif !", "Attention!", JOptionPane.WARNING_MESSAGE);
+									kilomA.removeAll();
+									kilomA.repaint();
+									setVisible(true);
+					        	}
+							}
+							succes=false;
+							while (!succes) {
+								try {
+									s=amort.getText();
+									amortisseur=Integer.parseInt(s);
+									if (kilomAnnee <0) throw new NumberFormatException();
+									succes = true;
+								}
+								catch (NumberFormatException e1) {
+									JOptionPane.showMessageDialog(null, "L'élément amortissement que vous avez entré au clavier n'est pas un un nombre entier positif !", "Attention!", JOptionPane.WARNING_MESSAGE);
+									amort.removeAll();
+									amort.repaint();
+									setVisible(true);
+					        	}
+							}
+							if (size.getSelectedItem().equals("Petite")) taille=Taille.P;
+							else taille= Taille.G;
+							tr.add(new Transport(taille,kilomAnnee,amortisseur));
+							dispose();
+						}
+					});
+					
+					boutons.add(next);
+					
+					this.getContentPane().add(content, BorderLayout.CENTER);
+				    this.getContentPane().add(boutons, BorderLayout.SOUTH);
+					
+				}
+				
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		class PageLog extends JFrame implements ActionListener {
+			
+			private static final long serialVersionUID = 1L;
+
+			String s;
+			boolean succes = false;
+			
+			int nblog;
+
+			public PageLog(){
+				super("Logement");
+			}
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Fenetre2.this.setVisible(false);
+				boutons.remove(BTlog);
+				
+				while (!succes) {
+					try {
+						s = JOptionPane.showInputDialog(null, "Combien de logements possédez vous? ", "Nombre de logements", JOptionPane.QUESTION_MESSAGE);
+						nblog=Integer.parseInt(s);
+						if (nblog <0) throw new NumberFormatException();
+						succes = true;
+					}
+					catch (NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un un nombre entier positif !", "Attention!", JOptionPane.WARNING_MESSAGE);
+		        	}
+				}
+				
+				JOptionPane.showMessageDialog(null, "Le formulaire suivant va s'afficher "+nblog+" fois.\nVeuillez entrer les informations de chacun de vos logements.", "Information", JOptionPane.INFORMATION_MESSAGE);
+				for (int i =1;i<=nblog;i++) {
+					new FormLog(null, "Logement "+i,true);
+					JOptionPane.showMessageDialog(null, ((ArrayList<Logement>) log).get(i-1).toString(), "Consommation des logements", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				if (boutons.getComponentCount()!=0) Fenetre2.this.setVisible(true);
+				else {
+					Fenetre2.this.dispose();
+					new Final();
+				}
+			}
+			
+			class FormLog extends JDialog{
+
+				private static final long serialVersionUID = 1L;
+				
+				private JComboBox<String> ce;
+				private JTextField size;
+				private JLabel sizeLab,ceLab;
+				
+				
+				private int superficie;
+			    private CE classeE;
+				
+				public FormLog(JFrame parent,String title,boolean modal) {
+					super(parent, title, modal);
+					this.setSize(550, 270);
+				    this.setLocationRelativeTo(null);
+				    this.setResizable(false);
+				    this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+				    this.initComponent();
+				    
+				    this.setVisible(true);
+				}
+				
+				public void initComponent() {
+					
+					//Taille
+					JPanel panCE=new JPanel ();
+					panCE.setBorder(BorderFactory.createTitledBorder("Taille du véhicule"));
+					ce=new JComboBox<String>();
+					ce.addItem("A");
+					ce.addItem("B");
+					ce.addItem("C");
+					ce.addItem("D");
+					ce.addItem("E");
+					ce.addItem("F");
+					ce.addItem("G");
+					
+					ceLab=new JLabel ("Classe énergetique :");
+					panCE.add(ceLab);
+					panCE.add(ce);
+					
+					
+					//Superficie
+					JPanel panSup=new JPanel();
+					size=new JTextField();
+					size.setPreferredSize(new Dimension(90, 25));
+					panSup.setBorder(BorderFactory.createTitledBorder("Superficie du logement"));
+					sizeLab=new JLabel("Superficie :");
+					panSup.add(sizeLab);
+					panSup.add(size);
+					panSup.add(new JLabel ("m²."));
+					
+					
+					
+					JPanel content =new JPanel();
+					content.add(panCE);
+					content.add(panSup);
+					
+					JPanel boutons = new JPanel();
+					JButton next= new JButton("Suivant");
+					next.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent a) {
+							setVisible(false);
+							succes=false;
+							while (!succes) {
+								try {
+									s=size.getText();
+									superficie=Integer.parseInt(s);
+									if (superficie <0) throw new NumberFormatException();
+									succes = true;
+								}
+								catch (NumberFormatException e1) {
+									JOptionPane.showMessageDialog(null, "L'élément superficie que vous avez entré au clavier n'est pas un un nombre entier positif !", "Attention!", JOptionPane.WARNING_MESSAGE);
+									size.removeAll();
+									size.repaint();
+									setVisible(true);
+					        	}
+							}
+							
+							classeE=CE.valueOf((String)ce.getSelectedItem());
+							log.add(new Logement(superficie,classeE));
+							dispose();
+						}
+					});
+					
+					boutons.add(next);
+					
+					this.getContentPane().add(content, BorderLayout.CENTER);
+				    this.getContentPane().add(boutons, BorderLayout.SOUTH);
+					
+				}
+				
+			}
+		}
+		
+		class PageBS implements ActionListener{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Fenetre2.this.setVisible(false);
+				boutons.remove(BTbs);
+				
+				JOptionPane.showMessageDialog(null, "Cette classe de consommation ne nécessite aucune donnée.\n La valeur de son impact est commune a tous les français", "Information", JOptionPane.INFORMATION_MESSAGE);
+				sp=new ServicesPublics();
+				JOptionPane.showMessageDialog(null, sp.toString(), "Consommation des services publics", JOptionPane.INFORMATION_MESSAGE);
+				if (boutons.getComponentCount()!=0) Fenetre2.this.setVisible(true);
+				else {
+					Fenetre2.this.dispose();
+					new Final();
+				}
+			}
+			
+			
+		}
+		
+		class Final extends JFrame{
+			
+			
+			private static final long serialVersionUID = 1L;
+
+			
+			public Final() {
+				super ("Résumé des postes de consommation et conseils"); 
+		        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		        this.setSize(800,600);
+		        this.setLayout(null);
+		        this.setLocationRelativeTo(null);
+				
+		        this.setJMenuBar(creetMenuBar(this));
+		        
+		        JPanel contentFen = (JPanel) this.getContentPane();
+		        contentFen.setLayout(new BorderLayout());
+		        
+		        util=new Utilisateur(alim,bc,log,tr,sp,nom.getText(),prenom.getText());
+		        
+		        
+			}
+		}
+		
     }
 
 }

@@ -290,7 +290,7 @@ public class Main {
 		utilisateurs.add((Utilisateur ) u);
 
 		Population pop = new Population(utilisateurs);
-		pop.DetaillePopulation();
+		System.out.println(pop.DetaillePopulation());
 
 		pop.DecisionMairie();
 
