@@ -235,11 +235,8 @@ public class Accueil extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Fenetre2.this.setVisible(false);
 				boutons.remove(BTbc);
-
-
 				while (!succes) {
 					try {
-						
 						s = JOptionPane.showInputDialog(null, "Veuillez entrer le montant de la consommation des biens", "Montant biens conso", JOptionPane.QUESTION_MESSAGE);
 						montant = Double.parseDouble(s);
 						succes = true;
