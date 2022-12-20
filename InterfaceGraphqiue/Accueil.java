@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import consoCarbone.*;
-import paquet.*;
+import GestionUtil.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 
 public class Accueil extends JFrame{
     /**
-	 *
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	Utilisateur util;
@@ -23,12 +23,12 @@ public class Accueil extends JFrame{
 	Logement log;
 	BienConso bc;
 	Transport tr;
-	ServicesPublics sp;
-
-
-
+	ServicesPublics sp; 
+	
+	
+	
 	public Accueil ()  {
-        super ("Accueil");
+        super ("Accueil"); 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(800,600);
         this.setLayout(null);
@@ -42,7 +42,7 @@ public class Accueil extends JFrame{
         /*Construction de la fenêtre*/
         JPanel contentFen = (JPanel) this.getContentPane();
         contentFen.setLayout(new BorderLayout());
-
+        
 
         //Titre de ma fenêtre
         JLabel Titre = new JLabel("Bienvenue dans notre Projet Empreinte Carbonne", SwingConstants.CENTER);
@@ -54,10 +54,10 @@ public class Accueil extends JFrame{
 
         //Ajouter Logo REVOIR !!!!!!!!!!!!!!!!!!!!!!!!!!
         contentFen.add(creeLogo(),BorderLayout.CENTER);
-
+    
         //Bouton Suivant
         JPanel next = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        //Bouton Suivant
+        //Bouton Suivant 
         JButton BTnext = new JButton("Suivant");
         next.add(BTnext, BorderLayout.SOUTH);
         BTnext.addActionListener(new Fenetre2());
@@ -72,17 +72,17 @@ public class Accueil extends JFrame{
         //Menu déroulant
         JMenu mnufile = new JMenu("Projet");
         menubar.add (mnufile);
-
+        
         mnufile.setFont(new Font (null, Font.BOLD, 12));
-
-
+        
+        
         //Élement qu'on ajoute au menu déroulant
         JMenuItem BTquitter = new JMenuItem("Quitter le Projet Empreinte Carbone");
         mnufile.add(BTquitter);
         //Raccourci
         BTquitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK));
 
-        //Listener BTquitter
+        //Listener BTquitter 
         BTquitter.addActionListener( e -> {
             this.dispose();
         });
@@ -90,9 +90,9 @@ public class Accueil extends JFrame{
 
     }
 
-    //Action pour le Bouton suivant
+    //Action pour le Bouton suivant 
    /* private void BTnextListener(ActionEvent event){
-
+        
 
     }*/
 
@@ -112,12 +112,12 @@ public class Accueil extends JFrame{
         Accueil accueil = new Accueil();
         accueil.setVisible(true);
     }
-
+    
 
     class Fenetre2 extends JFrame implements ActionListener{
 
 		/**
-		 *
+		 * 
 		 */
 		private static final long serialVersionUID = 1L;
 		JPanel boutons;
@@ -126,11 +126,11 @@ public class Accueil extends JFrame{
 		JButton BTtrans=new JButton ("Transports");
 		JButton BTlog=new JButton ("Logements");
 		JButton BTbs=new JButton ("Biens et Services");
-
+		
 		public Fenetre2() {
 			super ("Présentation");
 		}
-
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Accueil.this.dispose();
@@ -141,49 +141,49 @@ public class Accueil extends JFrame{
 	        this.setJMenuBar(creetMenuBar());
 	        JPanel contentFen = (JPanel) this.getContentPane();
 	        contentFen.setLayout(new BorderLayout());
-
+	        
 	        JLabel Titre = new JLabel("Quelle poste de consommation voulez vous analyser?", SwingConstants.CENTER);
 	        Titre.setVerticalAlignment(JLabel.TOP);
 	        Titre.setFont(new Font("Serif", Font.BOLD,20));
 	        contentFen.add(Titre,BorderLayout.PAGE_START);
-
-
+	        
+	        
 	        boutons = new JPanel();
-
+	        
 	       	boutons.add(BTal);
 	       	BTal.addActionListener(new PageAlim());
 
-
+	        
 	       	boutons.add(BTbc);
 	       	BTbc.addActionListener(new PageBC());
 
-
+	        
 	       	boutons.add(BTtrans);
 	       	//BTtrans.addActionListener(new PageTrans(boutons));
 
-
+	        
 	       	boutons.add(BTlog);
 	       	//BTlog.addActionListener(new PageLog(boutons));
 
-
+	        
 	       	boutons.add(BTbs);
 	       	//BTbs.addActionListener(new Pagebs(boutons));
 
 	        this.add(boutons,BorderLayout.SOUTH);
 	        this.setVisible(true);
-
+			
 		}
-
+		
 		public class PageAlim extends JFrame implements ActionListener {
 
 			/**
-			 *
+			 * 
 			 */
 			private static final long serialVersionUID = 1L;
 			String s;
 			double tauxb,tauxv;
 			boolean succes=false;
-
+			
 			public PageAlim() {
 				super("Alimentation");
 			}
@@ -193,12 +193,12 @@ public class Accueil extends JFrame{
 				Fenetre2.this.setVisible(false);
 				boutons.remove(BTal);
 
-
+				
 				while (!succes) {
 					try {
 						//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 						s= JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de beouf annuel (entre 0 et 1)", "Taux de boeuf", JOptionPane.QUESTION_MESSAGE);
-						tauxb=Double.parseDouble(s);
+						tauxb=Double.parseDouble(s); 
 						if(tauxb>1 || tauxb<0) throw new InvalidRateException();
 						succes=true;
 					}
@@ -214,7 +214,7 @@ public class Accueil extends JFrame{
 					try {
 						//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 						s= JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de végétarien annuel (entre 0 et 1)", "Taux de vegetarien", JOptionPane.QUESTION_MESSAGE);
-						tauxv=Double.parseDouble(s);
+						tauxv=Double.parseDouble(s); 
 						if(tauxv>1 || tauxv<0) throw new InvalidRateException();
 						succes=true;
 					}
@@ -229,20 +229,20 @@ public class Accueil extends JFrame{
 				JOptionPane.showMessageDialog(null, alim.toString(), "Consommation du poste alimentation", JOptionPane.INFORMATION_MESSAGE);
 				Fenetre2.this.setVisible(true);
 			}
-
+			
 		}
-
-
+		
+		
 		public class PageBC extends JFrame implements ActionListener {
 
 			/**
-			 *
+			 * 
 			 */
 			private static final long serialVersionUID = 1L;
 			String s;
 			double montant;
 			boolean succes=false;
-
+			
 			public PageBC() {
 				//super("Bien conso");
 			}
@@ -252,25 +252,25 @@ public class Accueil extends JFrame{
 				Fenetre2.this.setVisible(false);
 				boutons.remove(BTbc);
 
-
+				
 				while (!succes) {
 					try {
 						//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 						s= JOptionPane.showInputDialog(null, "Veuillez entrer le montant de la consommation des biens", "Montant biens conso", JOptionPane.QUESTION_MESSAGE);
-						montant=Double.parseDouble(s);
+						montant=Double.parseDouble(s); 
 						succes=true;
 					}
 					catch (NumberFormatException e1) {
 						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un nombre à décimal !", "Attention!", JOptionPane.WARNING_MESSAGE);
 		        	}
-
+					
 				}
-
+				
 				bc=new BienConso(montant);
 				JOptionPane.showMessageDialog(null, bc.toString(), "Consommation du poste bien conso", JOptionPane.INFORMATION_MESSAGE);
 				Fenetre2.this.setVisible(true);
 			}
-
+			
 		}
     }
 
