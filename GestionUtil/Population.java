@@ -38,7 +38,6 @@ public class Population extends Utilisateur {
             }
         }
         impactMoyPop = impactPop/utilisateurs.size();
-
         impactLogementMoy = impactLogementPop/utilisateurs.size();
         impactBienconsoMoy = impactBienconsoPop/utilisateurs.size();
         impactTransportMoy = impactTransportPop/utilisateurs.size();

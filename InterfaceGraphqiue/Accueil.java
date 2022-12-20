@@ -255,7 +255,6 @@ public class Accueil extends JFrame{
 
 		}
 
-
 		public class PageTrans extends JFrame implements ActionListener {
 			private static final long serialVersionUID = 1L;
 

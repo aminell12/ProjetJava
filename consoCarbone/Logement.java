@@ -118,7 +118,7 @@ catch (NumberFormatException e) {
 
 
 
-//pour les taux de vege/viandes etc
+//Pour les taux de vege/viandes etc
 succes=false; //si la varibale a été utilisée auparavant et est true
 while (!succes) {
         	try {
@@ -162,7 +162,7 @@ while (!succes) {
         		}
         		succes=true;
         	}
-        	catch (InvalidSizeException e) {
+        	catch (InvalidBooleanException e) {
         		System.out.println(e.getMessage());
         	} 
      }
