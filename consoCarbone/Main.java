@@ -21,7 +21,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Ce projet consiste à recceuillir des informations aupres de nos utilisateurs afin d'analyser l'Empreinte Carbone de notre population.");
+		System.out.println("Ce projet consiste à recceuillir des informations auprès de nos utilisateurs afin d'analyser l'Empreinte Carbone de notre population.");
 
 		//Bloc pour attendre quelques secondes
 		try {
@@ -31,38 +31,70 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		System.out.println("Vous devez entrer au minimum deux individus. Combien d'utilisateurs voulez-vous entrer ? (minimum 2)");
-		int nbUtilisateur = 0;
+		System.out.println("Vous avez le choix entre lire un fichier contenant vos informations ou bien entre les données vous même.");
+
+		System.out.println("Voulez-vous lire un fichier ? Entrer 1 pour lire un fichier, 0 sinon.");
+		boolean lirefichier = false;
+		int test;
+		succes = false;
 		while(!succes){
-			try{
-				entreeUt = scanner.next();
-				nbUtilisateur = Integer.parseInt(entreeUt);
-				//if(nbUtilisateur<2) 
-				succes = true;
-			}
-			catch(NumberFormatException e){
-				System.out.println("Attention ! Vous devez entrer un nombre entier supérieur ou égal à 2.");
+			try {
+        		entreeUt = scanner.next();
+        		if (!Arrays.asList("1","0").contains(entreeUt)) {
+        			throw new InvalidBooleanException();
+        		}
+				test = Integer.parseInt(entreeUt);
+				if (test == 1) lirefichier = true;
+				else lirefichier = false;
+        		succes = true;
+        	}
+        	catch (InvalidBooleanException e) {
+        		System.out.println(e.getMessage());
+        	} 
+		}
 
-			}
-		}
-		Collection<Utilisateur> utilisateurs = new ArrayList<Utilisateur> ();
-		for (int i = 0; i<nbUtilisateur; i++){
-			System.out.println("Bonjour utilisateur numéro "+ (i+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
-			utilisateurs.add(creeUtilisateur(scanner));
-		}
-		System.out.println("Nous avons bien enregistré vos informations. Nous procédons au calcul...");
+		
+		if (lirefichier){
+			Utilisateur utilisateur = new Utilisateur();
 
-		//Bloc pour attendre quelques secondes
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
-		Population population = new Population(utilisateurs);
-		population.DetaillePopulation();
-		population.DecisionMairie();
-		scanner.close();
+		else {
+			System.out.println("Vous devez entrer au minimum deux individus. Combien d'utilisateurs voulez-vous entrer ? (minimum 2)");
+			int nbUtilisateur = 0;
+			succes = false;
+			while(!succes){
+				try{
+					entreeUt = scanner.next();
+					nbUtilisateur = Integer.parseInt(entreeUt);
+					//if(nbUtilisateur<2) 
+					succes = true;
+				}
+				catch(NumberFormatException e){
+					System.out.println("Attention ! Vous devez entrer un nombre entier supérieur ou égal à 2.");
+
+				}
+			}
+			Collection<Utilisateur> utilisateurs = new ArrayList<Utilisateur> ();
+			for (int i = 0; i<nbUtilisateur; i++){
+				System.out.println("Bonjour utilisateur numéro "+ (i+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
+				utilisateurs.add(creeUtilisateur(scanner));
+			}
+			System.out.println("Nous avons bien enregistré vos informations. Nous procédons au calcul...");
+
+			//Bloc pour attendre quelques secondes
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			Population population = new Population(utilisateurs);
+			population.DetaillePopulation();
+			population.DecisionMairie();
+			scanner.close();
+		}
 
 	}
 

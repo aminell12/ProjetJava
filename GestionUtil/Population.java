@@ -2,7 +2,7 @@ package GestionUtil;
 import java.util.*;
 import consoCarbone.*;
 
-public class Population extends Utilisateur {
+public final class Population extends Utilisateur {
 
     private Collection <Utilisateur> utilisateurs;
 

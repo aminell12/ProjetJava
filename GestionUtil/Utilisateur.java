@@ -1,4 +1,6 @@
 package GestionUtil;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.*;
 import consoCarbone.*;
 
@@ -25,7 +27,7 @@ public class Utilisateur {
 	protected static String prenom;
 
 
-
+	//Constructeur de la classe 
     public Utilisateur (Alimentation alimentation,BienConso bienConso, Collection<Logement> logements , Collection <Transport> transports, ServicesPublics services, String nom, String prenom){//Constructeur de la classe Utilisateur
 		Utilisateur.alimentation = alimentation;
         Utilisateur.bienConso = bienConso;
@@ -35,7 +37,6 @@ public class Utilisateur {
 		Utilisateur.nom = nom;
 		Utilisateur.prenom = prenom;
 
-		
 		//Impact carbone d'un individu 
 		impactUt = alimentation.getImpact()+ bienConso.getImpact()+services.getEmpCarbFR();
     	for (Logement log : logements) {
@@ -46,6 +47,29 @@ public class Utilisateur {
     	}
     }
     
+	//Constructeur qui prend un ficher en flux d'entrée
+	public Utilisateur(){
+		try{
+			BufferedReader reader = new BufferedReader (new FileReader(new File("EmpreinteCarbone.txt")));
+			String line = reader.readLine();
+			while(line!=null){
+				line = reader.readLine();
+				System.out.println(line);
+
+			}
+			reader.close();
+
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace() ; 
+		}
+		catch(IOException e){
+			e.printStackTrace() ;
+		}
+
+	}
+
+
    //---Getters et Setters--- 
 
    public String getNom(){
@@ -158,8 +182,5 @@ public class Utilisateur {
         	
         }
     }
-    
-    
-    
     
 }
