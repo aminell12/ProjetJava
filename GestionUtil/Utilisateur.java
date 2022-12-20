@@ -48,14 +48,13 @@ public class Utilisateur {
     }
     
 	//Constructeur qui prend un ficher en flux d'entrée
-	public Utilisateur(){
+	public Utilisateur(String entreeUtilisateur){
 		try{
-			BufferedReader reader = new BufferedReader (new FileReader(new File("EmpreinteCarbone.txt")));
+			BufferedReader reader = new BufferedReader (new FileReader(new File(entreeUtilisateur)));
 			String line = reader.readLine();
 			while(line!=null){
 				line = reader.readLine();
 				System.out.println(line);
-
 			}
 			reader.close();
 
