@@ -18,7 +18,6 @@ public final class ServicesPublics extends ConsoCarbone{  // Je déclare cette c
         return instance;
     }
     
-    
     public double getEmpCarbFR (){ // Retourne l'empreinte carbonne d'un français
         return this.EmpCarbFR;
     }

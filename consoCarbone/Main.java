@@ -25,12 +25,12 @@ public class Main {
 
 		//Bloc pour attendre quelques secondes
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("Vous avez le choix entre lire un fichier contenant vos informations ou bien entre les données vous même.");
+		System.out.println("Vous avez le choix entre lire un fichier contenant vos informations ou bien entrer les données vous même.");
 
 		System.out.println("Voulez-vous lire un fichier ? Entrer 1 pour lire un fichier, 0 sinon.");
 		boolean lirefichier = false;
@@ -54,9 +54,28 @@ public class Main {
 
 		
 		if (lirefichier){
-			Utilisateur utilisateur = new Utilisateur();
+			System.out.println("						!!!Attention !!!\nVeuillez bien prendre en compte le format de fichier texte mis à disposition dans le dossier ReadMe. Une quelconque erreur de mise en page ou autre pourrait affecter la suite du programme.");
+			
+			//Bloc pour attendre quelques secondes
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			System.out.println("Quel est nom du fichier texte à lire ?");
+			succes = false;
+			String nomFic = scanner.next();
 
+			Utilisateur utilisateur = new Utilisateur(nomFic);
+			//Affiche l'empreinte carbone de l'individu du fichier et le conseille
+			utilisateur.detaillerEmpreinte();
+			System.out.println("\n\n");
+			utilisateur.conseille();
 
+			System.out.println("\n\n");
+			System.out.println("Pour l'instant nous ne pouvons traiter qu'un fichier texte à la fois. Dans une prochaine mise à jour nous pourrons à partir de plusieurs fichier texte créer une population afin de calculer et conseiller le niveau de l'Empreinte Carbone de celle-ci.");
 		}
 		else {
 			System.out.println("Vous devez entrer au minimum deux individus. Combien d'utilisateurs voulez-vous entrer ? (minimum 2)");
@@ -75,6 +94,7 @@ public class Main {
 				}
 			}
 			Collection<Utilisateur> utilisateurs = new ArrayList<Utilisateur> ();
+
 			//for (int i = 0; i<nbUtilisateur; i++){
 				//System.out.println("Bonjour utilisateur numéro "+ (i+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
 				creeUtilisateurs(scanner,utilisateurs,nbUtilisateur);
@@ -82,6 +102,7 @@ public class Main {
 				//utilisateurs.add(util);
 			//	scanner.reset();
 			//}
+
 			System.out.println("Nous avons bien enregistré vos informations. Nous procédons au calcul...");
 
 			//Bloc pour attendre quelques secondes

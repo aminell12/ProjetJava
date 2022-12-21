@@ -118,7 +118,7 @@ public final class Population extends Utilisateur {
             System.out.println("Au vu des derniers relevés sur l'Empreinte Carbone de la population, nous recommondons fortement aux habitants d'éviter la surconsommation, d'éviter les achats inutiles et de priviligier le reconditionnement, la seconde main...");
         }
         if (impactAlimentationMoy>IAlimentation) {
-            System.out.println("Au vu des derniers relevés sur l'Empreinte Carbone de la population, une nouvelle taxe habitation sera mise en place afin de compenser l'augmentation de l'EC.\n L'utilsation d'appreil avec un faible niveau de consommation est fortement recommendée dans les logement.");
+            System.out.println("Au vu des derniers relevés sur l'Empreinte Carbone de la population, favoriser la consommation de plat végétariens...");
         }  
     }
 
