@@ -138,7 +138,7 @@ public class Utilisateur {
     	for (Transport tr :  transports) {
     		impactTr+=tr.getImpact();
     	}
-		System.out.println("Alimentation : " + alimentation.getImpact() +" TCO2eq\nBiens consommés : " + bienConso.getImpact()+" TCO2eq\nLogement : " + impactLog + " TCO2eq\nTransport : " + impactTr + " TCO2eq\nServices Publics : " + services.getEmpCarbFR() + " TCO2eq.");
+		System.out.println("--------------Consommation de "+prenom+" "+nom+"--------------\nAlimentation : " + alimentation.getImpact() +" TCO2eq\nBiens consommés : " + bienConso.getImpact()+" TCO2eq\nLogement : " + impactLog + " TCO2eq\nTransport : " + impactTr + " TCO2eq\nServices Publics : " + services.getEmpCarbFR() + " TCO2eq.");
     }
     
     public void conseille() { //Conseille sur la consommation d'un individu
