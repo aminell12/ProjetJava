@@ -48,16 +48,88 @@ public class Utilisateur {
     }
     
 	//Constructeur qui prend un ficher en flux d'entrée
-	public Utilisateur(String entreeUtilisateur){
+	public  Utilisateur(String entreeUtilisateur){
 		try{
+			//Initialisation du buffer afin de lire le fichier texte
 			BufferedReader reader = new BufferedReader (new FileReader(new File(entreeUtilisateur)));
-			String line = reader.readLine();
+			String line = "";
+			int superficie = 0;
+			CE ce;
+			Taille taille = null;
+			int kilom = 0;
+			int amortissement = 0;
+			double txboeuf = 0;
+			double txvege = 0;
+			Utilisateur.logements = new ArrayList<Logement>();
+			Utilisateur.transports = new ArrayList<Transport>();
+
+
+			//Boucle while pour lire ligne par ligne le fichier texte
 			while(line!=null){
 				line = reader.readLine();
-				System.out.println(line);
+				if (line == null) break;
+				
+				//Recupère le nom et prénom de l'individu dans le fichier
+				if (line.contains("Nom")){
+					String [] elemline = line.split(":");
+					Utilisateur.nom = elemline[1];
+				}
+				if (line.contains("Prénom")){
+					String [] elemline = line.split(":");
+					Utilisateur.prenom = elemline[1];
+				}
+				//récupère la superficie et la classe énergetique s'il a un logement 
+				if (line.contains("Superficie") || line.contains("Classe énergétique")){
+					if (line.contains("Superficie")){
+						String [] elemline = line.split(":");
+						superficie = Integer.parseInt(elemline[1]);
+					}
+					if(line.contains ("Classe énergétique")){
+						String [] elemline = line.split(":");
+						ce = CE.valueOf(elemline[1]);
+						Utilisateur.logements.add(new Logement(superficie,ce));
+					}
+				}
+				//Récupère la Taille, le kilométrage et l'amortissement du véhicule s'il en a. Initialise les services
+				if((line.contains("Taille")) || (line.contains("Kilométrage")) || (line.contains("Amortissement"))){
+					if (line.contains("Taille")){
+						String [] elemline = line.split(":");
+						taille = Taille.valueOf(elemline[1]);
+					}
+					if(line.contains ("Kilométrage")){
+						String [] elemline = line.split(":");
+						kilom = Integer.parseInt(elemline[1]);
+					}
+					if (line.contains("Amortissement")){
+						String [] elemline = line.split(":");
+						amortissement = Integer.parseInt(elemline[1]);
+						Utilisateur.transports.add(new Transport(taille, kilom, amortissement));
+					}
+				}
+				//Récupère le montant et initialise les services
+				if(line.contains("Montant")){
+					String [] elemline = line.split(":");
+					double montant = Double.parseDouble(elemline[1]);
+					Utilisateur.bienConso = new BienConso(montant);
+				}
+				//Récupère et initialise Services publiques
+				if (line.contains("Empreinte carbone française ")){
+					Utilisateur.services = new ServicesPublics();
+				}
+				//Récupère et initialise Alimentation
+				if (line.contains("Taux Boeuf") || line.contains("Taux Végé")){
+					if(line.contains("Taux Boeuf")){
+						String [] elemline = line.split(":");
+						txboeuf = Double.parseDouble(elemline[1]);
+					}
+					if (line.contains("Taux Végé")){
+						String [] elemline = line.split(":");
+						txvege = Double.parseDouble(elemline[1]);
+						Utilisateur.alimentation = new Alimentation(txboeuf,txvege);
+					}
+				}
 			}
 			reader.close();
-
 		}
 		catch (FileNotFoundException e){
 			e.printStackTrace() ; 
@@ -105,7 +177,6 @@ public class Utilisateur {
 
 	//On suppose qu'on ne peut pas changer le nom et prenom d'un individu donc pas besoin de setter pour leurs attributs
 
-
 	public void setAlimentation(Alimentation alimentation) {
 		Utilisateur.alimentation = alimentation;
 	}
@@ -137,6 +208,7 @@ public class Utilisateur {
     	for (Transport tr :  transports) {
     		impactTr+=tr.getImpact();
     	}
+		System.out.println("\n\n----------------Fiche récapitulative de " + Utilisateur.nom +" "+ Utilisateur.prenom + ":----------------\n" );
 		System.out.println("Alimentation : " + alimentation.getImpact() +" TCO2eq\nBiens consommés : " + bienConso.getImpact()+" TCO2eq\nLogement : " + impactLog + " TCO2eq\nTransport : " + impactTr + " TCO2eq\nServices Publics : " + services.getEmpCarbFR() + " TCO2eq.");
     }
     

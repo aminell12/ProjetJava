@@ -64,23 +64,18 @@ public class Main {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+	
 			System.out.println("Quel est nom du fichier texte à lire ?");
 			succes = false;
-			entreeUt = "";
-			while(!succes){
-				try {
-					entreeUt = scanner.next();
-					succes = true;
-				}
-				catch (StringIndexOutOfBoundsException e) {
-					System.out.println(e.getMessage());
-				} 
-			}
-			
+			String nomFic = scanner.next();
 
+			Utilisateur utilisateur = new Utilisateur(nomFic);
+			//Affiche l'empreinte carbone de l'individu du fichier et le conseille
+			utilisateur.detaillerEmpreinte();
+			System.out.println("\n\n");
+			utilisateur.conseille();
 
-
+			System.out.println("\n\n");
 			System.out.println("Pour l'instant nous ne pouvons traiter qu'un fichier texte à la fois. Dans une prochaine mise à jour nous pourrons à partir de plusieurs fichier texte créer une population afin de calculer et conseiller le niveau de l'Empreinte Carbone de celle-ci.");
 		}
 		else {
@@ -102,7 +97,8 @@ public class Main {
 			Collection<Utilisateur> utilisateurs = new ArrayList<Utilisateur> ();
 			for (int i = 0; i<nbUtilisateur; i++){
 				System.out.println("Bonjour utilisateur numéro "+ (i+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
-				utilisateurs.add(creeUtilisateur(scanner));
+				Utilisateur u = creeUtilisateur(scanner);
+				utilisateurs.add(u);
 			}
 			System.out.println("Nous avons bien enregistré vos informations. Nous procédons au calcul...");
 

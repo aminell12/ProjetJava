@@ -1,17 +1,20 @@
 Nom : Lallali
 Prénom : Amine
                                                         Logement 
-Nombre de logement : 1
-        -logement 1 :
-        superficie : 45 m2
-        classe énergétique : B
+-logement n°1 :
+        Superficie (Nombre entier) :45
+        Classe énergétique (A,B,C,D,E,F,G):B
                                                         Transports 
-Nombre de véhicules : 0
+-véhicule n°1 :
+        Taille (P,G):P
+        Kilométrage (Nombre entier):90000
+        Amortissement (Nombre entier):900
+
                                                         BienConsommation
-Montant : 200 €
+Montant (Nombre décimal):200
                                                         Services publics
-Empreinte carbone française : 1.5 TCO2eq
+Empreinte carbone française (Nombre décimal):1.5
                                                         Alimentation
-Taux Boeuf : 0.7
-Taux Vege : 0.2  
+Taux Boeuf (Nombre décimal) :0.7
+Taux Végé (Nombre décimal) :0.2 
 
