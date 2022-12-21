@@ -10,7 +10,6 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		String entreeUt = "";
 		boolean succes = false;
-		Utilisateur util;
 
 		System.out.println("Bienvenue dans le menu interactif du Projet Empreinte Carbone.");
 
@@ -77,31 +76,27 @@ public class Main {
 			System.out.println("Pour l'instant nous ne pouvons traiter qu'un fichier texte à la fois. Dans une prochaine mise à jour nous pourrons à partir de plusieurs fichier texte créer une population afin de calculer et conseiller le niveau de l'Empreinte Carbone de celle-ci.");
 		}
 		else {
-			System.out.println("Vous devez entrer au minimum deux individus. Combien d'utilisateurs voulez-vous entrer ? (minimum 2)");
+			System.out.println("Vous devez entrer au minimum deux individus. Combien d'utilisateurs voulez-vous entrer ? (minimum 1)");
 			int nbUtilisateur = 0;
 			succes = false;
 			while(!succes){
 				try{
 					entreeUt = scanner.next();
 					nbUtilisateur = Integer.parseInt(entreeUt);
-					if(nbUtilisateur<2) throw new NumberFormatException();
+					if(nbUtilisateur<1) throw new NumberFormatException();
 					succes = true;
 				}
 				catch(NumberFormatException e){
-					System.out.println("Attention ! Vous devez entrer un nombre entier supérieur ou égal à 2.");
+					System.out.println("Attention ! Vous devez entrer un nombre entier supérieur ou égal à 1.");
 
 				}
 			}
+
 			Collection<Utilisateur> utilisateurs = new ArrayList<Utilisateur> ();
 
-			//for (int i = 0; i<nbUtilisateur; i++){
-				//System.out.println("Bonjour utilisateur numéro "+ (j+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
-				creeUtilisateurs(scanner,utilisateurs,nbUtilisateur);
-				//util=creeUtilisateur(scanner,utilisateurs);
-				//utilisateurs.add(util);
-			//	scanner.reset();
-			//}
-
+			//Crée une liste d'utilisateurs
+			creeUtilisateurs(scanner,utilisateurs,nbUtilisateur);
+				
 			System.out.println("Nous avons bien enregistré vos informations. Nous procédons au calcul...");
 
 			//Bloc pour attendre quelques secondes
@@ -111,6 +106,7 @@ public class Main {
 				e.printStackTrace();
 			}
 			
+			//Crée la population d'utilisateur et récapitule la fiche de chaque individu, il ya aussi un compte rendu sur l'empreinte carbone de la population
 			Population population = new Population(utilisateurs);
 			population.DetaillePopulation();
 			population.DecisionMairie();
@@ -138,8 +134,6 @@ public class Main {
 		
 		double txvege = 0, txboeuf = 0;
 		double montant = 0;
-		
-
 		
 		for (int i = 0; i<nbUtil; i++){
 			System.out.println("Bonjour utilisateur numéro "+ (i+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
@@ -374,8 +368,6 @@ public class Main {
 		
 		utilisateurs.add(null);
 		((ArrayList<Utilisateur>) utilisateurs).set(i,new Utilisateur(new Alimentation(txboeuf,txvege), new BienConso(montant), logs, transports, new ServicesPublics(), nom, Prenom));
-		
-		//return u;
 		}
 	}
 
@@ -434,6 +426,5 @@ public class Main {
 
 		 */
 		MenuInteractif();
-
     }
 }
