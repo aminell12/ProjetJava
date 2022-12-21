@@ -60,7 +60,6 @@ public class Main {
 			try {
 				Thread.sleep(6000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	
@@ -96,7 +95,7 @@ public class Main {
 			Collection<Utilisateur> utilisateurs = new ArrayList<Utilisateur> ();
 
 			//for (int i = 0; i<nbUtilisateur; i++){
-				//System.out.println("Bonjour utilisateur numéro "+ (i+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
+				//System.out.println("Bonjour utilisateur numéro "+ (j+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
 				creeUtilisateurs(scanner,utilisateurs,nbUtilisateur);
 				//util=creeUtilisateur(scanner,utilisateurs);
 				//utilisateurs.add(util);
@@ -140,7 +139,6 @@ public class Main {
 		double txvege = 0, txboeuf = 0;
 		double montant = 0;
 		
-		Utilisateur u;
 
 		
 		for (int i = 0; i<nbUtil; i++){
@@ -181,7 +179,7 @@ public class Main {
 		
 			for (int j = 0; j< nblog; j++){
 				//Recupère la superficie du logement de l'utilisateur
-				System.out.println("Quel est la superficie de votre logement n° "+ (i+1) +"? (en m2)");
+				System.out.println("Quel est la superficie de votre logement n° "+ (j+1) +"? (en m2)");
 			
 				succes = false;
 				while (!succes) {
@@ -196,7 +194,7 @@ public class Main {
 				}
 
 				//Recupère la classe énergétique de l'individu
-				System.out.println("Quelle est la classe energetique de votre logement n° "+ (i+1) +"? (choix : A,B,C,D,E,F,G) ");
+				System.out.println("Quelle est la classe energetique de votre logement n° "+ (j+1) +"? (choix : A,B,C,D,E,F,G) ");
 				succes = false;
 				while (!succes) {
 					try {
@@ -217,7 +215,7 @@ public class Main {
 			//Récupre le mode de transport de l'utilisateur
 			System.out.println("Possedez-vous un (ou plusieurs) véhicule(s) ? (Oui/Non)");
 		
-			boolean reponse;
+			
 			succes = false;
 			while (!succes) {
 				try {
@@ -231,14 +229,11 @@ public class Main {
 					System.out.println(e.getMessage());
 				} 
 			}
-			if (entreeUt.equals("Oui")) reponse = true;
-			else reponse = false;
-			if (reponse == false) {
-			
+			if (entreeUt.equals("Non")) {
 				trans = new Transport(false);
 				transports.add(trans);
-			}	
-			else{ 
+			}
+			else { 
 				//Récupere le nombre de voitures
 				System.out.println("Combien de véhicules possedez-vous ?");
 					
@@ -256,11 +251,11 @@ public class Main {
 					}
 				} 
 
-				//Collection de logements de l'utilisateurs
+				//Collection de transports de l'utilisateurs
 			
 				for (int j = 0; j< nbtrans; j++){
 					//Recupère la Taille du vehicule de l'utilisateur
-					System.out.println("Quel est la taille de votre voiture n° "+ (i+1) +"? (P/G)");
+					System.out.println("Quel est la taille de votre voiture n° "+ (j+1) +"? (P/G)");
 					Taille taille = null;
 					succes = false;
 					while (!succes) {
@@ -278,7 +273,7 @@ public class Main {
 					}
 				
 					//Recupère le kilometrage du vehicule
-					System.out.println("Quelle est le kilometrage de votre véhicule n° "+ (i+1) +"?");
+					System.out.println("Quelle est le kilometrage de votre véhicule n° "+ (j+1) +"?");
 				
 					succes = false;
 					while (!succes) {
@@ -288,11 +283,11 @@ public class Main {
 							succes=true;
 						}	
 						catch (NumberFormatException e) {
-							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer le kilometrage par année du véhicule n°"+ (i+1) +".");
+							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer le kilometrage par année du véhicule n°"+ (j+1) +".");
 						}
 					}
 					//Récupère l'amortissement du véhicule
-					System.out.println("Quelle est l'amortissement de votre véhicule n° "+ (i+1) +"?");
+					System.out.println("Quelle est l'amortissement de votre véhicule n° "+ (j+1) +"?");
 				
 					succes = false;
 					while (!succes) {
@@ -302,7 +297,7 @@ public class Main {
 							succes=true;
 						}	
 						catch (NumberFormatException e) {
-							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer l'amortissement du véhicule n°"+ (i+1) +".");
+							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer l'amortissement du véhicule n°"+ (j+1) +".");
 						}
 					}
 
@@ -378,8 +373,9 @@ public class Main {
 				System.out.println("Montant invalide. Le montant de la consommation de vos biens doit étre un double");
 			}
 		}
-		u = new Utilisateur(new Alimentation(txboeuf,txvege), new BienConso(montant), logs, transports, new ServicesPublics(), nom, Prenom);
-		utilisateurs.add(u);
+		
+		utilisateurs.add(null);
+		((ArrayList<Utilisateur>) utilisateurs).set(i,new Utilisateur(new Alimentation(txboeuf,txvege), new BienConso(montant), logs, transports, new ServicesPublics(), nom, Prenom));
 		
 		//return u;
 		}
