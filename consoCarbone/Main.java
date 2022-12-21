@@ -20,7 +20,7 @@ public class Main {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Ce projet consiste à recceuillir des informations auprès de nos utilisateurs afin d'analyser l'Empreinte Carbone de notre population.");
 
 		//Bloc pour attendre quelques secondes
@@ -49,21 +49,20 @@ public class Main {
         	}
         	catch (InvalidBooleanException e) {
         		System.out.println(e.getMessage());
-        	} 
+        	}
 		}
 
-		
+
 		if (lirefichier){
 			System.out.println("						!!!Attention !!!\nVeuillez bien prendre en compte le format de fichier texte mis à disposition dans le dossier ReadMe. Une quelconque erreur de mise en page ou autre pourrait affecter la suite du programme.");
-			
+
 			//Bloc pour attendre quelques secondes
 			try {
 				Thread.sleep(6000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	
+
 			System.out.println("Quel est nom du fichier texte à lire ?");
 			succes = false;
 			String nomFic = scanner.next();
@@ -95,9 +94,13 @@ public class Main {
 			}
 			Collection<Utilisateur> utilisateurs = new ArrayList<Utilisateur> ();
 
-			
-			creeUtilisateurs(scanner,utilisateurs,nbUtilisateur);
-				
+			//for (int i = 0; i<nbUtilisateur; i++){
+				//System.out.println("Bonjour utilisateur numéro "+ (j+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
+				creeUtilisateurs(scanner,utilisateurs,nbUtilisateur);
+				//util=creeUtilisateur(scanner,utilisateurs);
+				//utilisateurs.add(util);
+			//	scanner.reset();
+			//}
 
 			System.out.println("Nous avons bien enregistré vos informations. Nous procédons au calcul...");
 
@@ -107,7 +110,7 @@ public class Main {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 			Population population = new Population(utilisateurs);
 			population.DetaillePopulation();
 			population.DecisionMairie();
@@ -115,29 +118,28 @@ public class Main {
 		}
 	}
 
-	//Méthode pour créer un utilisateur 
+	//Méthode pour créer un utilisateur
 	private static void creeUtilisateurs(Scanner scanner,Collection<Utilisateur> utilisateurs,  int nbUtil){
 		boolean succes = false;
 		String entreeUt = "";
 		String nom,Prenom;
-		
+
 		int nblog = 0;
 		Collection <Logement> logs = new ArrayList<Logement>();
 		int superficie = 0;
 		Logement log;
-		
+
 		int nbtrans = 0;
 		Collection <Transport> transports = new ArrayList<Transport>();
 		Transport trans;
 		int kilometre = 0;
 		int amortissement = 0;
-		
+
 		double txvege = 0, txboeuf = 0;
 		double montant = 0;
-		
-		Utilisateur u;
 
-		
+
+
 		for (int i = 0; i<nbUtil; i++){
 			System.out.println("Bonjour utilisateur numéro "+ (i+1) +". Nous allons vous poser quelques questions concernant votre quotidien.");
 			System.out.println("Quel est votre Nom ?");
@@ -148,18 +150,18 @@ public class Main {
 
 			Prenom = scanner.next();
 			System.out.println("Rentrons un peu plus dans le vif du sujet.");
-		
+
 			//Bloc pour attendre quelques secondes
 			try {
 				Thread.sleep(2000);
-			} 
+			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
 			//Recupère les logements de l'indiviu
 			System.out.println("Combien de logements possedez-vous ?");
-		
+
 			succes = false;
 			while (!succes) {
 				try {
@@ -175,8 +177,8 @@ public class Main {
 			//Collection de logements de l'utilisateurs
 			for (int j = 0; j< nblog; j++){
 				//Recupère la superficie du logement de l'utilisateur
-				System.out.println("Quel est la superficie de votre logement n° "+ (i+1) +"? (en m2)");
-			
+				System.out.println("Quel est la superficie de votre logement n° "+ (j+1) +"? (en m2)");
+
 				succes = false;
 				while (!succes) {
 					try {
@@ -190,7 +192,7 @@ public class Main {
 				}
 
 				//Recupère la classe énergétique de l'individu
-				System.out.println("Quelle est la classe energetique de votre logement n° "+ (i+1) +"? (choix : A,B,C,D,E,F,G) ");
+				System.out.println("Quelle est la classe energetique de votre logement n° "+ (j+1) +"? (choix : A,B,C,D,E,F,G) ");
 				succes = false;
 				while (!succes) {
 					try {
@@ -202,40 +204,37 @@ public class Main {
 					}
 					catch (InvalidCEException e) {
 						System.out.println(e.getMessage());
-					} 
+					}
 				}
 				log = new Logement(superficie,CE.valueOf(entreeUt));
 				logs.add(log);
 			}
 
-			//Récupère le mode de transport de l'utilisateur
-			System.out.println("Possedez-vous un ou plusieurs véhicules ? (1/0)");
-			Collection <Transport> transports = new ArrayList<Transport>();
-			boolean reponse;
+			//Récupre le mode de transport de l'utilisateur
+			System.out.println("Possedez-vous un (ou plusieurs) véhicule(s) ? (Oui/Non)");
+
+
 			succes = false;
 			int test = 0;
 			entreeUt = "";
 			while (!succes) {
-        		try {
-        			entreeUt = scanner.next();
-        			if (!Arrays.asList("1","0").contains(entreeUt)) {
-        				throw new InvalidBooleanException();
-        			}
-					test = Integer.parseInt(entreeUt);
-        			succes=true;
-        		}
-        		catch (InvalidBooleanException e) {
-        			System.out.println(e.getMessage());
-        		} 
-     		}
-			if (test == 1) reponse = true;
-			else reponse = false;
-			if (reponse == false) {
-				Transport trans = new Transport(false);
+				try {
+					entreeUt = scanner.next();
+					if (!Arrays.asList("Oui","Non").contains(entreeUt)) {
+						throw new InvalidBooleanException();
+					}
+					succes=true;
+				}
+				catch (InvalidBooleanException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			if (entreeUt.equals("Non")) {
+				trans = new Transport(false);
 				transports.add(trans);
 			}
-			else{ 
-				//Récupere le nombre de
+			else {
+				//Récupere le nombre de voitures
 				System.out.println("Combien de véhicules possedez-vous ?");
 				int nbtrans = 0;
 				entreeUt = "";
@@ -248,9 +247,64 @@ public class Main {
 						}
 						succes=true;
 					}
-					catch (InvalidBooleanException e) {
-						System.out.println(e.getMessage());
-					} 
+					catch (NumberFormatException e) {
+						System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez recommencer.");
+					}
+				}
+
+				//Collection de transports de l'utilisateurs
+
+				for (int j = 0; j< nbtrans; j++){
+					//Recupère la Taille du vehicule de l'utilisateur
+					System.out.println("Quel est la taille de votre voiture n° "+ (j+1) +"? (P/G)");
+					Taille taille = null;
+					succes = false;
+					while (!succes) {
+						try {
+							entreeUt = scanner.next();
+							if (!Arrays.asList("G","P").contains(entreeUt)) {
+								throw new InvalidSizeException();
+							}
+							taille = Taille.valueOf(entreeUt);
+							succes=true;
+						}
+						catch (InvalidSizeException e) {
+							System.out.println(e.getMessage());
+						}
+					}
+
+					//Recupère le kilometrage du vehicule
+					System.out.println("Quelle est le kilometrage de votre véhicule n° "+ (j+1) +"?");
+
+					succes = false;
+					while (!succes) {
+						try {
+							entreeUt = scanner.next();
+							kilometre = Integer.parseInt(entreeUt);
+							succes=true;
+						}
+						catch (NumberFormatException e) {
+							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer le kilometrage par année du véhicule n°"+ (j+1) +".");
+						}
+					}
+					//Récupère l'amortissement du véhicule
+					System.out.println("Quelle est l'amortissement de votre véhicule n° "+ (j+1) +"?");
+
+					succes = false;
+					while (!succes) {
+						try {
+							entreeUt = scanner.next();
+							amortissement = Integer.parseInt(entreeUt);
+							succes=true;
+						}
+						catch (NumberFormatException e) {
+							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer l'amortissement du véhicule n°"+ (j+1) +".");
+						}
+					}
+
+					trans = new Transport(taille,kilometre,amortissement);
+					transports.add(trans);
+
 				}
 				if (entreeUt.equals("Oui")) reponse = true;
 				else reponse = false;
@@ -258,16 +312,16 @@ public class Main {
 					Transport trans = new Transport(false);
 					trans = new Transport(false);
 					transports.add(trans);
-				}	
-				else{ 
+				}
+				else{
 					//Récupere le nombre de voitures
 					System.out.println("Combien de véhicules possedez-vous ?");
-						
+
 					entreeUt = "";
 					succes = false;
 					while (!succes) {
 						try {
-	
+
 							entreeUt = scanner.next();
 							nbtrans = Integer.parseInt(entreeUt);
 							succes=true;
@@ -275,7 +329,7 @@ public class Main {
 						catch (NumberFormatException e) {
 							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez recommencer.");
 						}
-					} 
+					}
 
 					//Collection de transport de l'utilisateurs
 					for (int j = 0; j< nbtrans; j++){
@@ -294,32 +348,32 @@ public class Main {
 							}
 							catch (InvalidSizeException e) {
 								System.out.println(e.getMessage());
-							} 
+							}
 						}
 						//Recupère le kilometrage du vehicule
 						System.out.println("Quelle est le kilometrage de votre véhicule n° "+ (i+1) +"?");
-					
+
 						succes = false;
 						while (!succes) {
 							try {
 								entreeUt = scanner.next();
 								kilometre = Integer.parseInt(entreeUt);
 								succes=true;
-							}	
+							}
 							catch (NumberFormatException e) {
 								System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer le kilometrage par année du véhicule n°"+ (i+1) +".");
 							}
 						}
 						//Récupère l'amortissement du véhicule
 						System.out.println("Quelle est l'amortissement de votre véhicule n° "+ (i+1) +"?");
-					
+
 						succes = false;
 						while (!succes) {
 							try {
 								entreeUt = scanner.next();
 								amortissement = Integer.parseInt(entreeUt);
 								succes=true;
-							}	
+							}
 							catch (NumberFormatException e) {
 								System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer l'amortissement du véhicule n°"+ (i+1) +".");
 							}
@@ -327,7 +381,7 @@ public class Main {
 
 						trans = new Transport(taille,kilometre,amortissement);
 						transports.add(trans);
-					
+
 					}
 				}
 
@@ -349,12 +403,12 @@ public class Main {
 			}
 				//Récupère le taux Boeuf
 				System.out.println("Quel est le taux de consommation de Boeuf ?");
-			
+
 				succes = false;
 				while (!succes) {
 					try {
 						entreeUt = scanner.next();
-						txboeuf=Double.parseDouble(entreeUt); 
+						txboeuf=Double.parseDouble(entreeUt);
 						if(txboeuf>1 || txboeuf<0) throw new InvalidRateException();
 						succes = true;
 					}
@@ -371,7 +425,7 @@ public class Main {
 			while (!succes) {
 				try {
 					entreeUt = scanner.next();
-					txvege = Double.parseDouble(entreeUt);  
+					txvege = Double.parseDouble(entreeUt);
 					if(txvege>1 || txvege<0) throw new InvalidRateException();
 					succes = true;
 				}
@@ -385,7 +439,7 @@ public class Main {
 
 			//Récupère la consommation des biens de l'individu
 			System.out.println("Quel est le montant de vos biens de consommations ?");
-			
+
 			succes = false;
 			while(!succes){
 				try{
@@ -402,11 +456,17 @@ public class Main {
 
 			}
 		}
+
+		utilisateurs.add(null);
+		((ArrayList<Utilisateur>) utilisateurs).set(i,new Utilisateur(new Alimentation(txboeuf,txvege), new BienConso(montant), logs, transports, new ServicesPublics(), nom, Prenom));
+
+		//return u;
+		}
 	}
 
-	
+
     public static void main (String [] args){
-        /* 
+        /*
         ConsoCarbone logement= new Logement(140,CE.A);
 		ConsoCarbone alim= new Alimentation(0.2,0.35);
 		ConsoCarbone transport= new Transport(Taille.P,15000,5);
@@ -426,19 +486,19 @@ public class Main {
 		System.out.println();
 		System.out.println(alim.toString());
 		System.out.println("\n\n");
-		
+
 		System.out.println("              ----EMPREINTE CARBONE DES TRANSPORTS----");
 		Transport.francais();
 		System.out.println();
 		System.out.println(transport.toString());
 		System.out.println("\n\n");
-		
+
 		System.out.println("              ----EMPREINTE CARBONE DES BIENS CONSOMÉS----");
 		BienConso.francais();
 		System.out.println();
 		System.out.println(bienconso.toString());
 		*/
-/* 
+/*
 
 		Collection<Transport> tr = new ArrayList<Transport> ();
 		tr.add((Transport) transport);
