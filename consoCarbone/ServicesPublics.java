@@ -22,6 +22,11 @@ public final class ServicesPublics extends ConsoCarbone{  // Je déclare cette c
     public double getEmpCarbFR (){
         return this.EmpCarbFR;
     }
+    
+    @Override
+    public String toString(){
+    	return ("L'empreinte carbone des services publics (commune a tous les francais) est de "+EmpCarbFR+"tCO2.");
+    }
 
 
 }

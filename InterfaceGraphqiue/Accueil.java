@@ -371,7 +371,7 @@ public class Accueil extends JFrame{
 				
 				private JComboBox<String> size;
 				private Taille taille;
-				private int kilomAnnee,amortisseur;
+				private int kilomAnnee,amortissement;
 				private JTextField kilomA,amort;
 				private JLabel sizeLab,kilomLab,amortLab;
 				
@@ -449,8 +449,8 @@ public class Accueil extends JFrame{
 							while (!succes) {
 								try {
 									s=amort.getText();
-									amortisseur=Integer.parseInt(s);
-									if (kilomAnnee <0) throw new NumberFormatException();
+									amortissement=Integer.parseInt(s);
+									if (amortissement <0) throw new NumberFormatException();
 									succes = true;
 								}
 								catch (NumberFormatException e1) {
@@ -462,7 +462,7 @@ public class Accueil extends JFrame{
 							}
 							if (size.getSelectedItem().equals("Petite")) taille=Taille.P;
 							else taille= Taille.G;
-							tr.add(new Transport(taille,kilomAnnee,amortisseur));
+							tr.add(new Transport(taille,kilomAnnee,amortissement));
 							dispose();
 						}
 					});
