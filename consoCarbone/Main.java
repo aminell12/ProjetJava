@@ -364,8 +364,8 @@ public class Main {
 			}
 		}
 		
-		utilisateurs.add(null);
-		((ArrayList<Utilisateur>) utilisateurs).set(i,new Utilisateur(new Alimentation(txboeuf,txvege), new BienConso(montant), logs, transports, new ServicesPublics(), nom, Prenom));
+		utilisateurs.add(new Utilisateur(new Alimentation(txboeuf,txvege), new BienConso(montant), logs, transports, new ServicesPublics(), nom, Prenom));
+		//((ArrayList<Utilisateur>) utilisateurs).set(i,new Utilisateur(new Alimentation(txboeuf,txvege), new BienConso(montant), logs, transports, new ServicesPublics(), nom, Prenom));
 		}
 	}
 
@@ -419,8 +419,6 @@ public class Main {
 		System.out.println(pop.DetaillePopulation());
 
 		pop.DecisionMairie();
-
-		MenuInteractif();
 
 		 */
 		MenuInteractif();
