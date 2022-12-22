@@ -31,18 +31,16 @@ public class Main {
 
 		System.out.println("Vous avez le choix entre lire un fichier contenant vos informations ou bien entrer les données vous même.");
 
-		System.out.println("Voulez-vous lire un fichier ? Entrer 1 pour lire un fichier, 0 sinon.");
+		System.out.println("Voulez-vous lire un fichier ? Entrer Oui pour lire un fichier, Non sinon.");
 		boolean lirefichier = false;
-		int test;
 		succes = false;
 		while(!succes){
 			try {
         		entreeUt = scanner.next();
-        		if (!Arrays.asList("1","0").contains(entreeUt)) {
+        		if (!Arrays.asList("Oui","Non","oui","non").contains(entreeUt)) {
         			throw new InvalidBooleanException();
         		}
-				test = Integer.parseInt(entreeUt);
-				if (test == 1) lirefichier = true;
+				if (entreeUt.equals("Oui") || entreeUt.equals("oui")) lirefichier = true;
 				else lirefichier = false;
         		succes = true;
         	}
