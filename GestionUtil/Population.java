@@ -6,8 +6,6 @@ public final class Population extends Utilisateur {
 
     private Collection <Utilisateur> population;
 
-    
-
     //Impact de la population
     private double impactPop;
     private double impactBienconsoPop;
