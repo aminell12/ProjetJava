@@ -4,9 +4,7 @@ import consoCarbone.*;
 
 public final class Population extends Utilisateur {
 
-    private Collection <Utilisateur> utilisateurs;
-
-    
+    private Collection <Utilisateur> population;
 
     //Impact de la population
     private double impactPop;
@@ -22,10 +20,10 @@ public final class Population extends Utilisateur {
     private double impactTransportMoy;
     private double impactAlimentationMoy;
 
-    public Population(Collection <Utilisateur> utilisateur) {
+    public Population(Collection <Utilisateur> population) {
         super(alimentation, bienConso, logements, transports, services,nom, prenom);
-        utilisateurs = utilisateur;
-        for (Utilisateur ut : utilisateurs){
+        this.population = population;
+        for (Utilisateur ut : population){
             impactPop += ut.getImpactUt();
             impactBienconsoPop += Utilisateur.bienConso.getImpact();
             impactAlimentationPop += Utilisateur.alimentation.getImpact();
@@ -37,22 +35,22 @@ public final class Population extends Utilisateur {
                 impactLogementPop += tr.getImpact();
             }
         }
-        impactMoyPop = impactPop/utilisateurs.size();
-        impactLogementMoy = impactLogementPop/utilisateurs.size();
-        impactBienconsoMoy = impactBienconsoPop/utilisateurs.size();
-        impactTransportMoy = impactTransportPop/utilisateurs.size();
-        impactAlimentationMoy = impactAlimentationPop/utilisateurs.size();
+        impactMoyPop = impactPop/population.size();
+        impactLogementMoy = impactLogementPop/population.size();
+        impactBienconsoMoy = impactBienconsoPop/population.size();
+        impactTransportMoy = impactTransportPop/population.size();
+        impactAlimentationMoy = impactAlimentationPop/population.size();
 
     }
 
     //---Getters et Setters--- 
 
-    public Collection <Utilisateur> getUtilisateurs(){
-        return utilisateurs;
+    public Collection <Utilisateur> getpopulation(){
+        return population;
     }
 
-    public void setutilisateurs(Collection <Utilisateur> utilisateurs) {
-		this.utilisateurs = utilisateurs;
+    public void setpopulation(Collection <Utilisateur> population) {
+		this.population = population;
 	}
 
     public double getImpactLogementPop(){
@@ -96,14 +94,13 @@ public final class Population extends Utilisateur {
 
     //Methode qui va permettre de detailler, calucler et conseiller sur l'empreinte carbone de chaque individu de la poupulation
     public void DetaillePopulation(){
-        for (Utilisateur ut : utilisateurs){
+        for (Utilisateur ut : population){
             System.out.println("\n\n----------------Fiche récapitulative de " + ut.getNom() +" "+ ut.getPrenom() + ":----------------\n" );
             System.out.println("\n\n");
             System.out.println(ut.conseil());
         }
-        System.out.println("L'Empreinte Carbone totale de la population est de " + impactPop+" TCO2eq.\nLa moyenne de la population cette année  est de " +impactMoyPop);
+        System.out.println("\n\nL'Empreinte Carbone totale de la population est de " + impactPop +" TCO2eq.\nLa moyenne de la population cette année  est de " +impactMoyPop);
     }
-
 
     public void DecisionMairie(){
         System.out.println("\n\n----------------Rapport du Maire:----------------\n" );
@@ -120,11 +117,4 @@ public final class Population extends Utilisateur {
             System.out.println("Au vu des derniers relevés sur l'Empreinte Carbone de la population, favoriser la consommation de plats végétariens...");
         }  
     }
-
-
-
-
-
-
-
 }
