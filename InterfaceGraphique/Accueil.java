@@ -1,4 +1,4 @@
-package InterfaceGraphqiue;
+package InterfaceGraphique;
 
 
 
