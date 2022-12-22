@@ -41,7 +41,7 @@ public final class BienConso extends ConsoCarbone{
      * @return le montant des dépenses annuelles de l'utilisateur.rice et son impact
      */
     public String toString(){
-        return "Le montant de la consommation des biens est de : " + montant + ". Son impact est de " + impact+".";
+        return "Le montant de la consommation des biens est de : " + montant + ". Son impact est de " + impact+"tCO2eq.";
     }
 
     /** Méthode statique détaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de ses dépenses.

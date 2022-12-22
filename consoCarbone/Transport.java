@@ -113,7 +113,7 @@ public final class Transport extends ConsoCarbone{
     @Override
     public String toString(){
         if (this.possede){
-            return "L'individu possede une voiture. Sa taille est "+ taille+". Elle a roule " + kilomAnnee+ " par an. Elle possede un amortissement de " + amortissement+ ". Lors de sa fabrication elle a emis " + taille.getEmission()+". Son impact est de " + impact+"."; 
+            return "L'individu possede une voiture. Sa taille est "+ taille+". Elle a roule " + kilomAnnee+ " par an. Elle possede un amortissement de " + amortissement+ ". Lors de sa fabrication elle a emis " + taille.getEmission()+". Son impact est de " + impact+"tCO2eq."; 
         }
         else {
             return "L'individu ne possede pas de voiture";

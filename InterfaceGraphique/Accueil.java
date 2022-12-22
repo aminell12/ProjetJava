@@ -171,7 +171,7 @@ public class Accueil extends JFrame{
 		JButton BTbc = new JButton ("Biens consommations");
 		JButton BTtrans = new JButton ("Transports");
 		JButton BTlog = new JButton ("Logements");
-		JButton BTbs = new JButton ("Biens et Services");
+		JButton BTsp = new JButton ("Biens et Services");
 
 		public Fenetre2() {
 			super ("Présentation"); //création de la page de presentation (ou Fenetre2)
@@ -195,7 +195,7 @@ public class Accueil extends JFrame{
 	        Titre.setFont(new Font("Serif", Font.BOLD,20));
 	        contentFen.add(Titre);
 	        
-	        
+	        //Chacun des boutons va activer la page de renseignement qui lui est associée
 	       	boutons.add(BTal);
 	       	BTal.addActionListener(new PageAlim());
 
@@ -209,69 +209,80 @@ public class Accueil extends JFrame{
 	       	boutons.add(BTlog);
 	       	BTlog.addActionListener(new PageLog());
 
-	       	boutons.add(BTbs);
-	       	BTbs.addActionListener(new PageBS());
+	       	boutons.add(BTsp);
+	       	BTsp.addActionListener(new PageSP());
 
 	        this.add(boutons,BorderLayout.SOUTH);
-	        this.setVisible(true);
+	        this.setVisible(true);//affiche la fenetre de Présentation avec tous les boutons et la phrase de présentation
 			
 		}
 		
 		
 		
-		
-		class PageAlim extends JFrame implements ActionListener {
+		/**
+		 *PageAlim correspond a l'étape ou l'on renseigne les habitudes alimentaire de l'utilisateur
+		 */
+		class PageAlim implements ActionListener {
 
 			
-			private static final long serialVersionUID = 1L;
 			String s;
 			double tauxb,tauxv;
 			boolean succes = false;
 
 			public PageAlim() {
-				super("Alimentation");
 			}
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Fenetre2.this.setVisible(false);
-				boutons.remove(BTal);
+				Fenetre2.this.setVisible(false);//la fenetre de presentation disparait le temps d'entrer les données qui serviront a initialiser l'alimentation de l'utilisateur
+				boutons.remove(BTal);//puisque l'alimentation sera traité ici, on n'aura plus besoin du bouton qui referencera a l'initialisation de cet élément
+				while(!succes) {
+					try {
+						while (!succes) {
+							try {
+						
+								s= JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de boeuf annuel (entre 0 et 1)", "Taux de boeuf", JOptionPane.QUESTION_MESSAGE);
+								tauxb=Double.parseDouble(s); 
+								if(tauxb>1 || tauxb<0) throw new InvalidRateException();
+								succes=true;
+							}	
+							catch (NumberFormatException e1) {
+								JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un nombre à decimal !", "Attention!", JOptionPane.WARNING_MESSAGE);
+							}
+							catch (InvalidRateException e2) {
+								JOptionPane.showMessageDialog(null, e2.getMessage(), "Attention!", JOptionPane.WARNING_MESSAGE);
+							}
+						}
+						succes=false;
+						while (!succes) {
+							try {
+						
+								s = JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de végétarien annuel (entre 0 et 1)", "Taux de vegetarien", JOptionPane.QUESTION_MESSAGE);
+								tauxv=Double.parseDouble(s);
+								if(tauxv>1 || tauxv<0) throw new InvalidRateException();
+								succes=true;
+							}
+							catch (NumberFormatException e1) {
+								JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un nombre a decimal !", "Attention!", JOptionPane.WARNING_MESSAGE);
+							}
+							catch (InvalidRateException e2) {
+								JOptionPane.showMessageDialog(null, e2.getMessage(), "Attention!", JOptionPane.WARNING_MESSAGE);
+							}
+						}
+						if (tauxb+tauxv>1) {
+							succes=false;
+							throw new InvalidRateException();
+						}
+					}
+					catch(InvalidRateException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage()+"\n Veuillez réessayer en verifiant la valeur de vos taux.", "Attention!", JOptionPane.WARNING_MESSAGE);
+					}
+				}
 				
-				while (!succes) {
-					try {
-						
-						s= JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de beouf annuel (entre 0 et 1)", "Taux de boeuf", JOptionPane.QUESTION_MESSAGE);
-						tauxb=Double.parseDouble(s); 
-						if(tauxb>1 || tauxb<0) throw new InvalidRateException();
-						succes=true;
-					}
-					catch (NumberFormatException e1) {
-						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un nombre à decimal !", "Attention!", JOptionPane.WARNING_MESSAGE);
-		        	}
-					catch (InvalidRateException e2) {
-						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier ne correspond pas à un taux !", "Attention!", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-				succes=false;
-				while (!succes) {
-					try {
-						
-						s = JOptionPane.showInputDialog(null, "Veuillez entrer votre taux de consommation de végétarien annuel (entre 0 et 1)", "Taux de vegetarien", JOptionPane.QUESTION_MESSAGE);
-						tauxv=Double.parseDouble(s);
-						if(tauxv>1 || tauxv<0) throw new InvalidRateException();
-						succes=true;
-					}
-					catch (NumberFormatException e1) {
-						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier n'est pas un nombre a decimal !", "Attention!", JOptionPane.WARNING_MESSAGE);
-		        	}
-					catch (InvalidRateException e2) {
-						JOptionPane.showMessageDialog(null, "L'élément que vous avez entré au clavier ne correspond pas à un taux !", "Attention!", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-				alim = new Alimentation(tauxb,tauxv);
+				alim = new Alimentation(tauxb,tauxv); //on initialise l'élément alimentation de l'utilisateur à l'aide des données récupérées 
 				JOptionPane.showMessageDialog(null, alim.toString(), "Consommation du poste alimentation", JOptionPane.INFORMATION_MESSAGE);
-				if (boutons.getComponentCount()!=0) Fenetre2.this.setVisible(true);
-				else {
+				if (boutons.getComponentCount()!=0) Fenetre2.this.setVisible(true);//dans le cas ou il nous reste encore des boutons sur la fentre de presentation, on la raffiche sur l'ecran de l'utilisateur 
+				else {// si il n'y en a plus, cela signifie que l'on a traité tous les postes de consommation, on peut donc supprimer la fenetre de presentationet passer a la derniere page
 					Fenetre2.this.dispose();
 					new Final();
 				}
@@ -282,16 +293,16 @@ public class Accueil extends JFrame{
 		
 		
 		
-		
-		class PageBC extends JFrame implements ActionListener {
+		/**
+		 *PageBC correspond a l'étape ou l'on renseigne les habitudes des biens conso de l'utilisateur
+		 */
+		class PageBC implements ActionListener {
 
-			private static final long serialVersionUID = 1L;
 			String s;
 			double montant;
 			boolean succes = false;
 
 			public PageBC() {
-				super("Bien Consommation");
 			}
 
 			@Override
@@ -322,10 +333,11 @@ public class Accueil extends JFrame{
 
 		
 		
-		
-		class PageTrans extends JFrame implements ActionListener {
+		/**
+		 *PageTrans correspond a l'étape où l'on renseigne le nombre de véhicule de l'utilisateur et les informations liées à cahcune d'entre elle 
+		 */
+		class PageTrans implements ActionListener {
 			
-			private static final long serialVersionUID = 1L;
 
 			String s;
 			boolean succes = false;
@@ -333,7 +345,6 @@ public class Accueil extends JFrame{
 			int nbvoiture;
 
 			public PageTrans(){
-				super("Transport");
 			}
 	
 			@Override
@@ -354,7 +365,7 @@ public class Accueil extends JFrame{
 				}
 				JOptionPane.showMessageDialog(null, "Le formulaire suivant va s'afficher "+nbvoiture+" fois.\nVeuillez entrer les informations de chacun de vos véhicules", "Information", JOptionPane.INFORMATION_MESSAGE);
 				for (int i =1;i<=nbvoiture;i++) {
-					new FormTr(null, "Véhicule "+i,true);
+					new FormTr(null, "Véhicule "+i,true);//un nouveau formulaire est créé pour chaque voiture que possede l'utilisateur
 					JOptionPane.showMessageDialog(null, ((ArrayList<Transport>) tr).get(i-1).toString(), "Consommation des transports", JOptionPane.INFORMATION_MESSAGE);
 				}
 				
@@ -427,7 +438,8 @@ public class Accueil extends JFrame{
 					
 					JPanel boutons = new JPanel();
 					JButton next= new JButton("Suivant");
-					next.addActionListener(new ActionListener() {
+					next.addActionListener(new ActionListener() {//Des qu'on appuie sur next, on cache la page et on teste les valeurs qui ont été entrée par l'utilisateur 
+																//si des valeurs posent problemes, on raffiche le formulaire pour que l'utilisateur puisse entrer une nouvelle valeur 
 						public void actionPerformed(ActionEvent a) {
 							setVisible(false);
 							succes=false;
@@ -463,7 +475,7 @@ public class Accueil extends JFrame{
 							if (size.getSelectedItem().equals("Petite")) taille=Taille.P;
 							else taille= Taille.G;
 							tr.add(new Transport(taille,kilomAnnee,amortissement));
-							dispose();
+							dispose(); //si toutes les conditions sont respectées, on supprime la page
 						}
 					});
 					
@@ -488,18 +500,17 @@ public class Accueil extends JFrame{
 		
 		
 		
-		
-		class PageLog extends JFrame implements ActionListener {
+		/**
+		 *PageLog correspond a l'étape où l'on renseigne le nombre de logement de l'utilisateur et les informations liées à cahcun d'entre eux 
+		 */
+		class PageLog implements ActionListener {
 			
-			private static final long serialVersionUID = 1L;
-
 			String s;
 			boolean succes = false;
 			
 			int nblog;
 
 			public PageLog(){
-				super("Logement");
 			}
 	
 			@Override
@@ -627,12 +638,16 @@ public class Accueil extends JFrame{
 			}
 		}
 		
-		class PageBS implements ActionListener{
+		
+		/**
+		 *PageSP correspond a l'étape ou l'on récupères l'impact des services publics
+		 */
+		class PageSP implements ActionListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Fenetre2.this.setVisible(false);
-				boutons.remove(BTbs);
+				boutons.remove(BTsp);
 				
 				JOptionPane.showMessageDialog(null, "Cette classe de consommation ne nécessite aucune donnée.\n La valeur de son impact est commune a tous les français", "Information", JOptionPane.INFORMATION_MESSAGE);
 				sp=new ServicesPublics();
@@ -647,6 +662,9 @@ public class Accueil extends JFrame{
 			
 		}
 		
+		/**
+		 *Final correspond a la derniere etape qui va résumer les données a l'utilisateur
+		 */
 		class Final extends JFrame{
 			
 			

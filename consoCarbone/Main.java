@@ -1,6 +1,7 @@
 package consoCarbone;
 
 import java.util.*;
+
 import GestionUtil.*;
 
 
@@ -324,36 +325,48 @@ public class Main {
 		
 		succes = false;
 		while (!succes) {
-        	try {
-        		entreeUt = scanner.next();
-        		txboeuf=Double.parseDouble(entreeUt); 
-        		if(txboeuf>1 || txboeuf<0) throw new InvalidRateException();
-        		succes = true;
-        	}
-        	catch (NumberFormatException e) {
-        		System.out.println("\nLa valeur entrée n'est pas un nombre à décimal. Veuillez entrez le taux de consommation de boeuf.");
-        	}
-        	catch(InvalidRateException e) {
-        		System.out.println(e.getMessage());
-        	}
-        }
-		//Récupère le taux Vege
-		System.out.println("Quel est le taux de consommation de Vege ?");
-		succes = false;
-		while (!succes) {
-        	try {
-        		entreeUt = scanner.next();
-        		txvege = Double.parseDouble(entreeUt);  
-        		if(txvege>1 || txvege<0) throw new InvalidRateException();
-        		succes = true;
-        	}
-        	catch (NumberFormatException e) {
-        		System.out.println("\nLa valeur entrée n'est pas un nombre à décimal. Veuillez entrez le taux de consommation de vegetarien"+ ".");
-        	}
-        	catch(InvalidRateException e) {
-        		System.out.println(e.getMessage());
-        	}
-        }
+			try {
+				while (!succes) {
+					try {
+						entreeUt = scanner.next();
+						txboeuf=Double.parseDouble(entreeUt); 
+						if(txboeuf>1 || txboeuf<0) throw new InvalidRateException();
+						succes = true;
+					}
+					catch (NumberFormatException e) {
+						System.out.println("\nLa valeur entrée n'est pas un nombre à décimal. Veuillez entrez le taux de consommation de boeuf.");
+					}
+					catch(InvalidRateException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				//Récupère le taux Vege
+				System.out.println("Quel est le taux de consommation de Vege ?");
+				succes = false;
+				while (!succes) {
+					try {
+						entreeUt = scanner.next();
+						txvege = Double.parseDouble(entreeUt);  
+						if(txvege>1 || txvege<0) throw new InvalidRateException();
+						succes = true;
+					}
+					catch (NumberFormatException e) {
+						System.out.println("\nLa valeur entrée n'est pas un nombre à décimal. Veuillez entrez le taux de consommation de vegetarien"+ ".");
+					}
+					catch(InvalidRateException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				if (txboeuf+txvege>1) {
+					succes=false;
+					throw new InvalidRateException();
+				}
+			}
+			catch(InvalidRateException e) {
+				System.out.println(e.getMessage()+"\n Veuillez réessayer en verifiant la valeur de vos taux.");
+			}
+		}
+			
 
 		//Récupère la consommation des biens de l'individu
 		System.out.println("Quel est le montant de vos biens de consommations ?");
