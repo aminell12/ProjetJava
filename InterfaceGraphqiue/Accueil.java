@@ -15,36 +15,48 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
+/**
+ * Accueil est la classe qui s'occupe de la mise en page et de l'affichage de l'interface graphique 
+ * Elle extends la classe JFrame puisqu'elle se base sur une premiere fenetre qui en generera d'autres grâce a l'activation de boutons
+ */
 public class Accueil extends JFrame{
-    /**
-	 * 
+    /* serialVersionUID: Accueil est serialisable, il est donc preferable d'initialiser un ID permettant de serialiser ou deserialiser la class 
 	 */
 	private static final long serialVersionUID = 1L;
+	/*util: l'utilisateur que nous allons initialiser grace a l'interface
+	 */
 	Utilisateur util;
 	Alimentation alim;
 	Collection <Logement> log=new ArrayList <Logement>();
 	BienConso bc;
 	Collection <Transport> tr=new ArrayList <Transport>();
 	ServicesPublics sp; 
-	JTextField nom,prenom;
 	
+	
+	/* nom, prenon: espace dans une frame qui permettra de recuperer le nom et le prenom de l'utilisateur
+	 */
+	JTextField nom,prenom;
+	/*Id:fenetre sur laquelle l'utilisatuer pourra entrer son nom et son prenom
+	 */
 	JDialog Id=new JDialog((JFrame)null,"Identité",true);
 	
 	
-	
+	/*
+	 * Construction de la classe Accueil
+	 */
 	public Accueil ()  {
-        super ("Accueil"); 
+        super ("Accueil"); //creation de la fenetre d'accueil
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(800,600);
         this.setLayout(null);
         this.setLocationRelativeTo(null); //Centre la fenêtre à partir de l'écran de l'utilisateur
-        //setResizable(false); //On interdit la redimensionnement de la fenêtre
 
         
-      //Récupération de l'identité de l'utilisateur
+      //Apparition d'un pop-up informatif avant la fenetre demandant l'identité de l'utilisateur
         JOptionPane.showMessageDialog(null, "Avant de commencer, veuillez entrer votre nom et votre prénom" , "Identité", JOptionPane.INFORMATION_MESSAGE);
         
-        
+      //Création de la fenêtre qui va permettre la récupération de l'identité de l'utilisateur
         Id.setSize(300, 200);
 	    Id.setLocationRelativeTo(null);
 	    Id.setResizable(false);
@@ -75,7 +87,8 @@ public class Accueil extends JFrame{
         ide.add(panNom);
 		ide.add(panPrenom);
 		
-		JButton val = new JButton("Validate");
+		//Le bouton valider va permettre de faire disparaitre et de supprimer la fenetre sur laquelle on est 
+		JButton val = new JButton("Valider");
 		val.addActionListener( e -> {
 			Id.dispose();
 		});
@@ -84,7 +97,7 @@ public class Accueil extends JFrame{
 		Id.getContentPane().add(ide, BorderLayout.CENTER);
 		Id.getContentPane().add(boutons,BorderLayout.SOUTH);
 		
-		
+		//Affichage de la fenetre recuperant l'identité sur l'ecran de l'utilisateur 
 		Id.setVisible(true);
         
         
@@ -101,13 +114,7 @@ public class Accueil extends JFrame{
         JLabel Titre = new JLabel("Bienvenue "+prenom.getText()+" "+nom.getText()+" dans notre Projet Empreinte Carbonne!", SwingConstants.CENTER);
         Titre.setFont(new Font("Serif", Font.BOLD,20));
         contentFen.add(Titre);
-        //contentFen.add(new JLabel("Pour commencer, veuillez entrer votre nom et votre prénom."));
         
-        
-		
-
-        //Ajouter Logo REVOIR !!!!!!!!!!!!!!!!!!!!!!!!!!
-        //contentFen.add(creeLogo(),BorderLayout.CENTER);
 
         //Panel du bouton Suivant
         JPanel next = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -115,7 +122,7 @@ public class Accueil extends JFrame{
         //Bouton Suivant 
         JButton BTnext = new JButton("Suivant");
         next.add(BTnext, BorderLayout.SOUTH);
-        BTnext.addActionListener(new Fenetre2());
+        BTnext.addActionListener(new Fenetre2()); //Lorsque l'utilisateur appuie sur le bouton suivant, la creation de la 2e fenetre est lancée
         this.add(next,BorderLayout.SOUTH);
         
         
@@ -148,31 +155,18 @@ public class Accueil extends JFrame{
         return menubar;
     }
 
+ 
 
 
-
-    //Création du logo REVOOIR !!!!!!!!!!!!!!!!!!!!!
-    private JLabel creeLogo(){
-        ImageIcon img = new ImageIcon("logo_projet.png");
-        JLabel logo = new JLabel(img);
-        logo.setBounds(10, 10, 100, 100);
-        return logo;
-    }
-
-
-	//         ---MAIN---
-    public static void main(String [] args) throws Exception{
-        UIManager.setLookAndFeel(new NimbusLookAndFeel()) ;
-        //Ouvrir ma fenêtre
-        Accueil accueil = new Accueil();
-        accueil.setVisible(true);
-    }
     
 
     class Fenetre2 extends JFrame implements ActionListener{
 		//Nouvelle fenêtre créee en cliquant sur le bouton suivant
 		private static final long serialVersionUID = 1L;
-		JPanel boutons;
+		/*boutons: Panel qui va recueillir tous les boutons correspondant a chacun des postes de consommation
+		 */
+		JPanel boutons=new JPanel(); 
+		
 		JButton BTal = new JButton ("Alimentation");
 		JButton BTbc = new JButton ("Biens consommations");
 		JButton BTtrans = new JButton ("Transports");
@@ -180,12 +174,12 @@ public class Accueil extends JFrame{
 		JButton BTbs = new JButton ("Biens et Services");
 
 		public Fenetre2() {
-			super ("Présentation");
+			super ("Présentation"); //création de la page de presentation (ou Fenetre2)
 		}
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Accueil.this.dispose();
+			Accueil.this.dispose(); //Des que le bouton suivant de la fenetre Accueil est activé, la fenetre Accueil disparait et est supprimée  
 			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        this.setSize(800,600);
 	        this.setLayout(null);
@@ -194,13 +188,14 @@ public class Accueil extends JFrame{
 
 	        JPanel contentFen = (JPanel) this.getContentPane();
 	        contentFen.setLayout(new BorderLayout());
-			//Titre de la page
 	        
+	        
+			//Titre de la page
 	        JLabel Titre = new JLabel("Quelle poste de consommation voulez vous analyser?", SwingConstants.CENTER);
 	        Titre.setFont(new Font("Serif", Font.BOLD,20));
 	        contentFen.add(Titre);
-
-	        boutons = new JPanel();
+	        
+	        
 	       	boutons.add(BTal);
 	       	BTal.addActionListener(new PageAlim());
 
@@ -676,6 +671,14 @@ public class Accueil extends JFrame{
 			}
 		}
 		
+    }
+    
+	//         ---MAIN---
+    public static void main(String [] args) throws Exception{
+        UIManager.setLookAndFeel(new NimbusLookAndFeel()) ;
+        //Ouvrir ma fenêtre
+        Accueil accueil = new Accueil();
+        accueil.setVisible(true);
     }
 
 }

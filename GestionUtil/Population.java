@@ -98,9 +98,8 @@ public final class Population extends Utilisateur {
     public void DetaillePopulation(){
         for (Utilisateur ut : utilisateurs){
             System.out.println("\n\n----------------Fiche récapitulative de " + ut.getNom() +" "+ ut.getPrenom() + ":----------------\n" );
-            ut.detaillerEmpreinte();
             System.out.println("\n\n");
-            ut.conseille();
+            System.out.println(ut.conseil());
         }
         System.out.println("L'Empreinte Carbone totale de la population est de " + impactPop+" TCO2eq.\nLa moyenne de la population cette année  est de " +impactMoyPop);
     }

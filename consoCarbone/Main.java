@@ -40,7 +40,7 @@ public class Main {
         		if (!Arrays.asList("Oui","Non","oui","non").contains(entreeUt)) {
         			throw new InvalidBooleanException();
         		}
-				if (entreeUt.equals("Oui") || entreeUt.equals("oui")) lirefichier = true;
+        		if (entreeUt.equals("Oui") || entreeUt.equals("oui")) lirefichier = true;
 				else lirefichier = false;
         		succes = true;
         	}
@@ -66,15 +66,15 @@ public class Main {
 
 			Utilisateur utilisateur = new Utilisateur(nomFic);
 			//Affiche l'empreinte carbone de l'individu du fichier et le conseille
-			utilisateur.detaillerEmpreinte();
+			System.out.println(utilisateur.detaillerEmpreinte());
 			System.out.println("\n\n");
-			utilisateur.conseille();
+			System.out.println(utilisateur.conseil());
 
 			System.out.println("\n\n");
 			System.out.println("Pour l'instant nous ne pouvons traiter qu'un fichier texte à la fois. Dans une prochaine mise à jour nous pourrons à partir de plusieurs fichier texte créer une population afin de calculer et conseiller le niveau de l'Empreinte Carbone de celle-ci.");
 		}
 		else {
-			System.out.println("Vous devez entrer au minimum deux individus. Combien d'utilisateurs voulez-vous entrer ? (minimum 1)");
+			System.out.println("Vous devez entrer au minimum un individus. Combien d'utilisateurs voulez-vous entrer ? (minimum 1)");
 			int nbUtilisateur = 0;
 			succes = false;
 			while(!succes){
@@ -160,10 +160,11 @@ public class Main {
 				try {
 					entreeUt = scanner.next();
 					nblog = Integer.parseInt(entreeUt);
+					if (nblog<1) throw new NumberFormatException(); 
 					succes=true;
 				}
 				catch (NumberFormatException e) {
-					System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer un entier.");
+					System.out.println("La valeur entrée n'est pas un nombre entier supérieur à 1. Veuillez entrer un entier.");
 				}
 			}
 
@@ -178,10 +179,11 @@ public class Main {
 					try {
 						entreeUt = scanner.next();
 						superficie = Integer.parseInt(entreeUt);
+						if (superficie<0) throw new NumberFormatException();
 						succes=true;
 					}
 					catch (NumberFormatException e) {
-						System.out.println("\nLa valeur entrée n'est pas un nombre entier. Veuillez entrer la superficie de votre logement.");
+						System.out.println("\nLa valeur entrée n'est pas un nombre entier positif. Veuillez entrer la superficie de votre logement.");
 					}
 				}
 
@@ -210,7 +212,7 @@ public class Main {
 			while (!succes) {
 				try {
 					entreeUt = scanner.next();
-					if (!Arrays.asList("Oui","Non").contains(entreeUt)) {
+					if (!Arrays.asList("Oui","oui","Non","non").contains(entreeUt)) {
 						throw new InvalidBooleanException();
 					}
 					succes=true;
@@ -231,9 +233,9 @@ public class Main {
 				succes = false;
 				while (!succes) {
 					try {
-						
 						entreeUt = scanner.next();
 						nbtrans = Integer.parseInt(entreeUt);
+						if (nbtrans<0) throw new NumberFormatException();
 						succes=true;
 					}
 					catch (NumberFormatException e) {
@@ -270,10 +272,11 @@ public class Main {
 						try {
 							entreeUt = scanner.next();
 							kilometre = Integer.parseInt(entreeUt);
+							if (kilometre<0) throw new NumberFormatException();
 							succes=true;
 						}	
 						catch (NumberFormatException e) {
-							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer le kilometrage par année du véhicule n°"+ (j+1) +".");
+							System.out.println("La valeur entrée n'est pas un nombre entier positif. Veuillez entrer le kilometrage par année du véhicule n°"+ (j+1) +".");
 						}
 					}
 					//Récupère l'amortissement du véhicule
@@ -284,10 +287,11 @@ public class Main {
 						try {
 							entreeUt = scanner.next();
 							amortissement = Integer.parseInt(entreeUt);
+							if (amortissement<0) throw new NumberFormatException();
 							succes=true;
 						}	
 						catch (NumberFormatException e) {
-							System.out.println("La valeur entrée n'est pas un nombre entier. Veuillez entrer l'amortissement du véhicule n°"+ (j+1) +".");
+							System.out.println("La valeur entrée n'est pas un nombre entier positif. Veuillez entrer l'amortissement du véhicule n°"+ (j+1) +".");
 						}
 					}
 
@@ -300,7 +304,8 @@ public class Main {
 			//Bloc pour attendre quelques secondes
 			try {
 				Thread.sleep(2000);
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
@@ -310,7 +315,8 @@ public class Main {
 		//Bloc pour attendre quelques secondes
 		try {
 			Thread.sleep(2000);
-		} catch (InterruptedException e) {
+		} 
+		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		//Récupère le taux Boeuf
@@ -357,6 +363,7 @@ public class Main {
 			try{
 				entreeUt = scanner.next();
 				montant = Double.parseDouble(entreeUt);
+				if (montant<0) throw new NumberFormatException();
 				succes = true;
 			}
 			catch(NumberFormatException e){

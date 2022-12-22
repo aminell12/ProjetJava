@@ -1,7 +1,16 @@
-package consoCarbone;
+package TestJUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+
+import consoCarbone.Alimentation;
+import consoCarbone.BienConso;
+import consoCarbone.CE;
+import consoCarbone.ConsoCarbone;
+import consoCarbone.Logement;
+import consoCarbone.ServicesPublics;
+import consoCarbone.Taille;
+import consoCarbone.Transport;
 
 class TestConsoCarbone extends ConsoCarbone{
 	private ConsoCarbone alim;

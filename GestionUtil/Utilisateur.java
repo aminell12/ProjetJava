@@ -1,6 +1,5 @@
 package GestionUtil;
 import java.io.*;
-import java.nio.Buffer;
 import java.util.*;
 import consoCarbone.*;
 
@@ -200,7 +199,7 @@ public class Utilisateur {
 	//---Fin Getters et Setters---
 
 
-	public void detaillerEmpreinte(){ //Détaille l'empreinte carbone d'un individu
+	public String detaillerEmpreinte(){ //Détaille l'empreinte carbone d'un individu
 		double impactLog = 0,impactTr=0;
     	for (Logement log : logements) {
     		impactLog+=log.getImpact();
@@ -208,13 +207,14 @@ public class Utilisateur {
     	for (Transport tr :  transports) {
     		impactTr+=tr.getImpact();
     	}
-
-		System.out.println("\n\n----------------Fiche récapitulative de " + Utilisateur.nom +" "+ Utilisateur.prenom + ":----------------\n" );
-		System.out.println("Alimentation : " + alimentation.getImpact() +" TCO2eq\nBiens consommés : " + bienConso.getImpact()+" TCO2eq\nLogement : " + impactLog + " TCO2eq\nTransport : " + impactTr + " TCO2eq\nServices Publics : " + services.getEmpCarbFR() + " TCO2eq.");
-
+    	String aff="";
+    	aff+="\n\n----------------Fiche récapitulative de " + Utilisateur.nom +" "+ Utilisateur.prenom + ":----------------\n\n";
+    	aff+="Alimentation : " + alimentation.getImpact() +" TCO2eq\nBiens consommés : " + bienConso.getImpact()+" TCO2eq\nLogement : " + impactLog + " TCO2eq\nTransport : " + impactTr + " TCO2eq\nServices Publics : " + services.getEmpCarbFR() + " TCO2eq.";
+		return aff;
     }
     
-    public void conseille() { //Conseille sur la consommation d'un individu
+	
+    public String conseil() { //Conseille sur la consommation d'un individu
     	SortedMap<Double,String> conso= new TreeMap<Double,String>();
     	conso.put(alimentation.getImpact(),"alimentation");
     	conso.put(bienConso.getImpact(),"bienconso");
@@ -230,27 +230,30 @@ public class Utilisateur {
     	conso.put(impactTr,"transport");
     	Double max= conso.lastKey();
 
-    	System.out.println("\nLa classe avec l'impact le plus elevé est "+conso.get(max));
+    	String aff;
+    	
+    	aff="\nLa classe avec l'impact le plus elevé est "+conso.get(max)+".\n";
         
     	Set<Double> keys = conso.keySet();
         for (Double key : keys) {
-        	System.out.println("\n\nVotre consommation au poste "+ conso.get(key) +" est de "+ key +" TCO2eq.");
+        	aff+="\n\nVotre consommation au poste "+ conso.get(key) +" est de "+ key +" TCO2eq.\n";
         	
         	if ((conso.get(key) == "transport")&&(key>ITransport)) {
-        		System.out.println("C'est supérieur à la moyenne française. Priviligiez l'utilisation de transports en communs ou non polluants (velo,trotinette éléctrique,etc...).");
+        		aff+="C'est supérieur à la moyenne française. Priviligiez l'utilisation de transports en communs ou non polluants (velo,trotinette éléctrique,etc...).\n";
         	}
         	if ((conso.get(key) == "logement")&&(key>ILogement)) {
-        		System.out.println("C'est supérieur à la moyenne française. Limitez la consommation d'énergie et prenez soin d'éteindre vos appareils éléctroménagers s'ils ne sont pas utilisés.");
+        		aff+="C'est supérieur à la moyenne française. Limitez la consommation d'énergie et prenez soin d'éteindre vos appareils éléctroménagers s'ils ne sont pas utilisés.\n";
         	}
         	if ((conso.get(key) == "bienconso")&&(key>IBienconso)) {
-        		System.out.println("C'est supérieur à la moyenne française. Priviligiez l'achat de vêtements en seconde main et le reconditionnement des appreils éléctroniques.");
+        		aff+="C'est supérieur à la moyenne française. Priviligiez l'achat de vêtements en seconde main et le reconditionnement des appreils éléctroniques.\n";
         	}
         	if ((conso.get(key) == "alimentation")&&(key>IAlimentation)) {
-        		System.out.println("C'est supérieur à la moyenne française. Favorisez la consommation d'aliments végétariens.");
+        		aff+="C'est supérieur à la moyenne française. Favorisez la consommation d'aliments végétariens.\n";
         	}
         	//L'impact des services publics est commun à tous les français, on ne peut donc pas donner de conseils sur cette classe.
         	
         }
+        return aff;
     }
     
 }

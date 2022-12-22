@@ -1,15 +1,22 @@
 package consoCarbone;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
+/** Logement est une classe fille de la classe ConsoCarbonne qui permet le calcul de l'impacte energetique en fonction de son logement.
+ */
 public final class Logement extends ConsoCarbone {
+	/** superficie représente la superficie du logement
+	 */
     private int superficie;
+    /** classeE représente la classe énergétique du logement
+     */
     private CE classeE;
 
-    public Logement (){}
-    
-    public Logement (int superficie, CE classE){ //Constructeur de la classe Logement
+    /**Constructeur de la classe Logement
+     * @param superficie représente la superficie du logement
+     * @param classE représente la classe énergétique du logement
+     */
+    public Logement (int superficie, CE classE){
         super();
         this.superficie = superficie;
         this.classeE = classE;
@@ -17,156 +24,59 @@ public final class Logement extends ConsoCarbone {
     }
 
     //---Getters et Setters--- 
-    public int getSuperficie(){ //Retourne la sperfécie d'un logement
+    /** getter de l'attribut superficie de la classe Logement
+     * @return superficie: la superficie du logement
+     */
+    public int getSuperficie(){
         return superficie;
     }
-    public void setSuperficie (int superficie){ // Initialise la superficie d'un logement
+
+    /** setter de l'attribut superficie de la classe Logement
+     * @param superficie la superficie du logement
+     */
+
+    public void setSuperficie (int superficie){
         this.superficie = superficie;
     }
 
-    public CE getCE(){ // Retourne la classe énergétique d'un logement
+    /**getter de l'attribut classeE
+     * @return classeE la classe énergétique du logement
+     */
+    public CE getCE(){
         return classeE;
     }
-    public void setCE (CE classeE){ // Initialise la CE d'un logement
+
+    /** setter de l'attribut classeE de la classe Logement
+     * @param classeE la classe énergétique du logement
+     */
+    public void setCE (CE classeE){
         this.classeE = classeE;
     }
+    
     //---Fin Getters et Setters---  
 
 
+    /** Méthode qui permet de retourner les attributs de la classe Logement en chaines de caractères.
+     * @return la superficie du logement sa classe énergétique et son impacte.
+     */
     @Override
     public String toString(){
         return "Le logement a une superficie de : " + superficie + " m2, la une classe energetique est de type : " + classeE + ". Son impact energetique est de: " + impact + " TCO2eq.";
     }
-    
-    public static void francais(){ //Méthode statique pour les francais
+
+    /**Méthode statique détaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de son Logement.
+     */
+    public static void francais(){
         System.out.println("Energie et utilites : 1696 Kg/an. Construction et gros entretien : 675 Kg/an. Equipement des logements : 335 Kg/an. Total : 2706 Kg/an");
     }
 
-    //Teste si l'utilisateur entre la bonne empreinte carbone
+    /**Teste si l'utilisateur entre la bonne empreinte carbone
+     * @param s  la classe énergétique d’un logement.
+     * @return true si cette classe energétique existe, sinon false.
+     */
     static public boolean isCE(String s) {
 		List<String> ce=Arrays.asList("A","B","C","D","E","F","G");
 		return ce.contains(s);
 	}
-    
-  /*  public int compareTo(ConsoCarbone inst) {
- 	   if (impact==inst.impact) return 0;
- 	   if (impact<inst.impact) return -1;
- 	   return 1;
-     }*/
 
-
-    
-    //       Méthode main propre à la classe Logement. Elle intéragit avec l'utilsateur pour récupérer ses données.
-    
-	public static void main(String[] args){
-		Scanner scanner = new Scanner(System.in);
-        int superficie;
-        String s=""; 
-        boolean succes=false;
-        francais();
-        System.out.print("\n Vous êtes sur le calculateur d'empreinte carbone \n"); 
-        System.out.print("\n Nous allons calculer l'impact carbone de votre logement. Pour cela nous avons besoin de certaines informations sur votre domicile \n");
-        System.out.print("\n Q1 Quelle est la superficie de votre logement ? (en m2) \n");
-        while (!succes) {
-        	try {
-        		s = scanner.next();
-        		superficie=Integer.parseInt(s);
-        		succes=true;
-        	}
-        	catch (NumberFormatException e) {
-        		System.out.println("\nLa valeur entrée n'est pas un nombre entier. Veuillez entrer la superficie de votre logement.");
-        	}
-        }
-        superficie=Integer.parseInt(s);
-        System.out.print("\n Q2 Quelle est la classe energetique de votre logement ? (choix : A,B,C,D,E,F,G) \n");
-        succes=false;
-        while (!succes) {
-        	try {
-        		s = scanner.next();
-        		if (!Arrays.asList("A","B","C","D","E","F","G").contains(s)) {
-        			throw new InvalidCEException();
-        		}
-        		succes=true;
-        	}
-        	catch (InvalidCEException e) {
-        		System.out.println(e.getMessage());
-;        	} 
-        }
-        Logement logement = new Logement(superficie, CE.valueOf(s));
-    	System.out.print("\n L'impact de votre logement de "+logement.superficie+" m2 et de classe energetique "+logement.classeE+" est de "+ logement.impact+" TCO2eq.");
-        scanner.close();
-    
-	}
 }
-
-
-
-/*
-
-//pour test tous les nombres entiers
-succes=false; //si la varibale a été utilisée auparavant et est true
-while (!succes) {
-try {
-	s = scanner.next();
-	superficie=Integer.parseInt(s);
-	succes=true;
-}
-catch (NumberFormatException e) {
-	System.out.println("\nLa valeur entrée n'est pas un nombre entier. Veuillez entrer la superficie de votre logement.");
-}
-}
-
-
-
-//Pour les taux de vege/viandes etc
-succes=false; //si la varibale a été utilisée auparavant et est true
-while (!succes) {
-        	try {
-        		s = scanner.next();
-        		taux=Double.parseDouble(s); //parametre a changer en fonction du cas 
-        		if(taux>1 || taux<0) throw new InvalidRateException();
-        		succes=true;
-        	}
-        	catch (NumberFormatException e) {
-        		System.out.println("\nLa valeur entrée n'est pas un nombre. Veuillez entrer ....");
-        	}
-        	
-        }
- 
- 
- 
- //pour la taille des voitures 
-     succes=false; //si la varibale a été utilisée auparavant et est true
-     while (!succes) {
-        	try {
-        		s = scanner.next();
-        		if (!Arrays.asList("G","P").contains(s)) {
-        			throw new InvalidSizeException();
-        		}
-        		succes=true;
-        	}
-        	catch (InvalidSizeException e) {
-        		System.out.println(e.getMessage());
-        	} 
-        }
- 
-
-//pour la propriété d'une voiture
- 
-     succes=false; //si la varibale a été utilisée auparavant et est true
-     while (!succes) {
-        	try {
-        		s = scanner.next();
-        		if (!Arrays.asList("T","F").contains(s)) {
-        			throw new InvalidBooleanException();
-        		}
-        		succes=true;
-        	}
-        	catch (InvalidBooleanException e) {
-        		System.out.println(e.getMessage());
-        	} 
-     }
-     if (s=="T") possede=true;
-     else possede=false;
-        
-  */
