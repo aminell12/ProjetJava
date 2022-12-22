@@ -31,7 +31,7 @@ class TestTransport extends ConsoCarbone {
 	
 	@Test
 	void isTaille_notPnorG_returnBool() {
-		boolean output= Transport.isTaille("Q");
+		boolean output = Transport.isTaille("Q");
 		assertEquals(false,output);
 	}
 }

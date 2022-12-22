@@ -54,26 +54,26 @@ class TestConsoCarbone extends ConsoCarbone{
 	
 	@Test
 	public void isNumFloat_word_returnBool() {
-		boolean output= isNumFloat("hello");
+		boolean output = isNumFloat("hello");
 		assertEquals(false,output);
 	}
 	
 	
 	@Test
 	public void isNumFloat_float_returnBool() {
-		boolean output= isNumFloat("12.3");
+		boolean output = isNumFloat("12.3");
 		assertEquals(true,output);
 	}
 	
 	@Test
 	public void isNumEnt_Int_returnBool() {
-		boolean output= isNumEnt("123");
+		boolean output = isNumEnt("123");
 		assertEquals(true,output);
 	}
 	
 	@Test
 	public void isNumEnt_NotInt_returnBool() {
-		boolean output= isNumEnt("12 hfk 3");
+		boolean output = isNumEnt("12 hfk 3");
 		assertEquals(false,output);
 	}
 }

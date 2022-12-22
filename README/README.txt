@@ -5,7 +5,7 @@ Ce projet a pour but de calculer l'Empreinte Carbone d'un ou plusieurs individus
                                                     ------Compilation------
 Pour compiler notre programme voici la commande à entrer dans le terminal :
 
-javac consoCarbone/*.java InterfaceGraphqiue/*.java GestionUtil/*.java
+javac consoCarbone/*.java InterfaceGraphique/*.java GestionUtil/*.java TestJUnit/*.java
 
 
 Notre programme possède différents modes :
@@ -13,7 +13,7 @@ Notre programme possède différents modes :
 
         Afin de manipuler l'interface graphique de notre programme il suffit d'executer la commande suivante dans le terminal :
         
-        java InterfaceGraphqiue/Acceuil.java : revoir ça veut pas marcher !!!
+        java InterfaceGraphique/Acceuil.java : 
                                                
                                                 ------Lecture d'un fichier------
         Afin de lire les données d'un individu à partir d'un fichier il faut tout d'abord vérifier s'il est sous la bonne forme (voir l'exemple EmpreinteCarbone.txt dans le dossier README)
