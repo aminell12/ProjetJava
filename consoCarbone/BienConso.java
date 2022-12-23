@@ -44,7 +44,7 @@ public final class BienConso extends ConsoCarbone{
         return "Le montant de la consommation des biens est de : " + montant + ". Son impact est de " + impact+"tCO2eq.";
     }
 
-    /** Méthode statique détaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de ses dépenses.
+    /** Méthode statique détaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de ses dépenses.
      */
     public static void francais(){
         System.out.println("Achat et usages internet et technologies : 1180 Kg/an. Autres biens et services : 682 Kg/an. Habillement : 763 Kg/an. Total : 2625 Kg/an");

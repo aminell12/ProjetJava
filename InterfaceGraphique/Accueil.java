@@ -42,7 +42,7 @@ public class Accueil extends JFrame{
 	JDialog Id=new JDialog((JFrame)null,"Identité",true);
 	
 	
-	/*
+	/**
 	 * Construction de la classe Accueil
 	 */
 	public Accueil ()  {
@@ -130,7 +130,9 @@ public class Accueil extends JFrame{
     }
 	
 
-    /*Méthode de constrcution de la barre de menu */
+    /**
+     * Méthode de constrcution de la barre de menu 
+    */
     private JMenuBar creetMenuBar(JFrame page) {
         //Barre de menu
         JMenuBar menubar = new JMenuBar();
@@ -141,7 +143,7 @@ public class Accueil extends JFrame{
         mnufile.setFont(new Font (null, Font.BOLD, 12));
 
         
-        //Élement qu'on ajoute au menu déroulant
+        //élement qu'on ajoute au menu déroulant
         JMenuItem BTquitter = new JMenuItem("Quitter le Projet Empreinte Carbone");
         mnufile.add(BTquitter);
         
@@ -159,11 +161,13 @@ public class Accueil extends JFrame{
 
 
     
-
+    /**
+     * Fenetre2 est la classe qui definira la nouvelle fenêtre créee en cliquant sur le bouton suivant dans la page d'accueil
+     *
+     */
     class Fenetre2 extends JFrame implements ActionListener{
-		//Nouvelle fenêtre créee en cliquant sur le bouton suivant
 		private static final long serialVersionUID = 1L;
-		/*boutons: Panel qui va recueillir tous les boutons correspondant a chacun des postes de consommation
+		/**boutons: Panel qui va recueillir tous les boutons correspondant a chacun des postes de consommation
 		 */
 		JPanel boutons=new JPanel(); 
 		
@@ -173,10 +177,18 @@ public class Accueil extends JFrame{
 		JButton BTlog = new JButton ("Logements");
 		JButton BTsp = new JButton ("Biens et Services");
 
+		/**
+		 * Creation de la page de presentation (ou Fenetre2)
+		 */
 		public Fenetre2() {
-			super ("Présentation"); //création de la page de presentation (ou Fenetre2)
+			super ("Présentation"); 
 		}
 		
+		
+		/**
+		 * redéfinition de la methode actionPerformed de la classe ActionListener
+		 * elle permet de décider de ce qu'il se passera lorsque l'activation d'un bouton initialise un nouvel element de Fenetre2
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Accueil.this.dispose(); //Des que le bouton suivant de la fenetre Accueil est activé, la fenetre Accueil disparait et est supprimée  
@@ -665,33 +677,69 @@ public class Accueil extends JFrame{
 		/**
 		 *Final correspond a la derniere etape qui va résumer les données a l'utilisateur
 		 */
-		class Final extends JFrame{
+class Final extends JFrame{
 			
 			
 			private static final long serialVersionUID = 1L;
 
 			
 			public Final() {
-				super ("Résumé des postes de consommation et conseils"); 
+				
+				super ("Fin du programme"); 
 		        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		        this.setSize(800,600);
+		        this.setSize(800,400);
 		        this.setLayout(null);
 		        this.setLocationRelativeTo(null);
-				
 		        this.setJMenuBar(creetMenuBar(this));
+				this.getContentPane().setLayout(new BorderLayout());
 		        
-		        JPanel contentFen = (JPanel) this.getContentPane();
+		        JPanel contentFen = new JPanel();
 		        contentFen.setLayout(new BorderLayout());
 		        
 		        util=new Utilisateur(alim,bc,log,tr,sp,nom.getText(),prenom.getText());
+		        
+		        JPanel P=new JPanel();
+		        //P.setBorder(BorderFactory.createTitledBorder(""));
+		        JLabel Titre=new JLabel("Le calcul de votre consommation carbone est terminé.",SwingConstants.CENTER);
+		        Titre.setFont(new Font("Serif", Font.BOLD,30));
+		        P.add(Titre);
+		        
+		        JPanel RC=new JPanel(new BorderLayout());
+		        //RC.setBorder(BorderFactory.createTitledBorder(""));
+		        RC.add(new JLabel("Vous trouverez un résumé de votre consommation et quelques conseils en appuyant sur le bouton Résumé ci dessous.",SwingConstants.CENTER));
+		        
+		        contentFen.add(P,BorderLayout.NORTH);
+		        contentFen.add(RC,BorderLayout.CENTER);
+		        
+		        JPanel boutons=new JPanel();
+		        JButton Res=new JButton("Résumé");
+		        Res.addActionListener( e-> {
+		        	this.dispose();
+		        	JOptionPane.showMessageDialog(null, util.conseil() , "Identité", JOptionPane.INFORMATION_MESSAGE);
+		        });
+		        
+		        JButton F=new JButton("Fermer");
+		        F.addActionListener(e ->{
+		        	this.dispose();
+		        });
+		        
+		        boutons.add(F);
+		        boutons.add(Res);
+		        
+		        this.getContentPane().add(contentFen,BorderLayout.CENTER);
+		        this.getContentPane().add(boutons,BorderLayout.SOUTH);
+		        this.setVisible(true);
 		        
 		        
 			}
 		}
 		
     }
-    
-	//         ---MAIN---
+    /**
+     * Méthode main
+     * @param args
+     * @throws Exception
+     */
     public static void main(String [] args) throws Exception{
         UIManager.setLookAndFeel(new NimbusLookAndFeel()) ;
         //Ouvrir ma fenêtre

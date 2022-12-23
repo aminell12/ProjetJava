@@ -1,4 +1,5 @@
 package consoCarbone;
+
 /* interface implémentée par la classe consocarbone
  *
  */

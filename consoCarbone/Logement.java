@@ -8,7 +8,7 @@ public final class Logement extends ConsoCarbone {
 	/** superficie représente la superficie du logement
 	 */
     private int superficie;
-    /** classeE représente la classe énergétique du logement
+    /** classeE représente la classe énergétique du logement
      */
     private CE classeE;
 
@@ -64,14 +64,14 @@ public final class Logement extends ConsoCarbone {
         return "Le logement a une superficie de : " + superficie + " m2, la une classe energetique est de type : " + classeE + ". Son impact energetique est de: " + impact + " TCO2eq.";
     }
 
-    /**Méthode statique détaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de son Logement.
+    /**Méthode statique détaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de son Logement.
      */
     public static void francais(){
         System.out.println("Energie et utilites : 1696 Kg/an. Construction et gros entretien : 675 Kg/an. Equipement des logements : 335 Kg/an. Total : 2706 Kg/an");
     }
 
     /**Teste si l'utilisateur entre la bonne empreinte carbone
-     * @param s  la classe énergétique d’un logement.
+     * @param s  la classe énergétique d’un logement.
      * @return true si cette classe energétique existe, sinon false.
      */
     static public boolean isCE(String s) {

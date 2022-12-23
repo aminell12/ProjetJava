@@ -93,7 +93,7 @@ package consoCarbone;
             return "Le taux de repas à base de Boeuf est de : " + this.txBoeuf+ ", le taux de repas vegetariens est de : "+ this.txVege + " et le taux de repas à base de volaille est de:  " + (1-this.txVege-this.txBoeuf) +". L'impact energétique est de : "+ this.impact +" TCO2eq.";
         }
 
-        /**Méthode statique détaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de son Alimentation.
+        /**Méthode statique deétaillant sur la console l’empreinte carbone moyenne d’un.e français.e vis-à-vis de son Alimentation.
          */
         public static void francais(){//Méthode statique pour les francais
             System.out.println("Viandes et poisson : 1144 Kg/an. Produits laitiers et oeufs : 408 Kg/an. Autres : 538 Kg/an. Boisson : 263 Kg/an. Total : 2353 Kg/an");

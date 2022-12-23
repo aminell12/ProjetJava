@@ -1,6 +1,6 @@
 package consoCarbone;
 
-/**  ServicesPublics est une classe fille de la classe ConsoCarbonne représentant le poste de consommation carbone induit par les services publics (justice, police, éducation, santé, ...).
+/**  ServicesPublics est une classe fille de la classe ConsoCarbonne représentant le poste de consommation carbone induit par les services publics (justice, police, éducation, santé, ...).
  */
 public final class ServicesPublics extends ConsoCarbone{  // Je déclare cette classe comme étant un singleton car on a besoin que d'un élément dans cette classe,
                                 // l'empreinre carbone des français

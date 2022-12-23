@@ -5,7 +5,7 @@ package consoCarbone;
  */
 public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {   // je déclare la classe Consocarbone en tant que classe abstaite car elle est étendue par plusieurs classes.
                                         //J'implémente l'interface comparable pour poiuvoir comparé l'impact carbone de deux instances différentes
-    /** id correspond à un identifiant unique attribué à l’instance.
+    /** id correspond à un identifiant unique attribué à l’instance.
      */
 	private final int ID;
 	/** compteur d'identifiants
@@ -23,7 +23,7 @@ public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {   // je
     }
 
     /** Getter de l'attribut id
-     * @return un identifiant unique attribué à l’instance
+     * @return un identifiant unique attribué à l’instance
      */
     public int getID(){
         return ID;
