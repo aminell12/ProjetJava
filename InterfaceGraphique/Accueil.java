@@ -697,7 +697,7 @@ class Final extends JFrame{
 		        contentFen.setLayout(new BorderLayout());
 		        
 		        util=new Utilisateur(alim,bc,log,tr,sp,nom.getText(),prenom.getText());
-		        
+     
 		        JPanel P=new JPanel();
 		        //P.setBorder(BorderFactory.createTitledBorder(""));
 		        JLabel Titre=new JLabel("Le calcul de votre consommation carbone est terminé.",SwingConstants.CENTER);
@@ -725,7 +725,7 @@ class Final extends JFrame{
 		        
 		        boutons.add(F);
 		        boutons.add(Res);
-		        
+				
 		        this.getContentPane().add(contentFen,BorderLayout.CENTER);
 		        this.getContentPane().add(boutons,BorderLayout.SOUTH);
 		        this.setVisible(true);
@@ -733,7 +733,6 @@ class Final extends JFrame{
 		        
 			}
 		}
-		
     }
     /**
      * Méthode main
